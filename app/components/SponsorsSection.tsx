@@ -74,8 +74,36 @@ const sponsorTiers = [
 
 const SponsorsSection = () => {
   return (
-    <section className="py-20 px-4 bg-tesseract-sand/20">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 px-4 bg-gradient-to-br from-tesseract-light/60 via-tesseract-cream/40 to-tesseract-sand/60 relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-16 left-16 w-40 h-40 bg-tesseract-bronze/8 rounded-full blur-3xl"
+          animate={{
+            x: [0, 60, 0],
+            y: [0, -40, 0],
+          }}
+          transition={{
+            duration: 16,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-16 right-16 w-32 h-32 bg-tesseract-sand/12 rounded-full blur-3xl"
+          animate={{
+            x: [0, -35, 0],
+            y: [0, 45, 0],
+          }}
+          transition={{
+            duration: 13,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,10 +111,20 @@ const SponsorsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-tesseract-dark mb-4 [text-shadow:_0_1px_2px_rgb(255_255_255_/_30%)]">
+          <h2 
+            className="text-4xl md:text-6xl font-bold text-tesseract-dark mb-4"
+            style={{ 
+              textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(66,48,31,0.2)' 
+            }}
+          >
             Our Partners
           </h2>
-          <p className="text-xl font-medium text-tesseract-dark max-w-3xl mx-auto">
+          <p 
+            className="text-xl font-medium text-tesseract-bronze max-w-3xl mx-auto"
+            style={{ 
+              textShadow: '1px 1px 2px rgba(255,255,255,0.8)' 
+            }}
+          >
             Supported by industry leaders who believe in the future of technology
           </p>
         </motion.div>
@@ -102,8 +140,23 @@ const SponsorsSection = () => {
               className="text-center"
             >
               <div className="flex items-center justify-center mb-8">
-                <tier.icon className="w-8 h-8 text-tesseract-bronze mr-3" />
-                <h3 className="text-2xl font-bold text-tesseract-dark">
+                <motion.div
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <tier.icon 
+                    className="w-8 h-8 text-tesseract-bronze mr-3" 
+                    style={{ 
+                      filter: 'drop-shadow(1px 1px 2px rgba(255,255,255,0.8))' 
+                    }}
+                  />
+                </motion.div>
+                <h3 
+                  className="text-2xl font-bold text-tesseract-dark"
+                  style={{ 
+                    textShadow: '1px 1px 2px rgba(255,255,255,0.8)' 
+                  }}
+                >
                   {tier.tier}
                 </h3>
               </div>
@@ -129,7 +182,7 @@ const SponsorsSection = () => {
                       scale: 1.05,
                       y: -5 
                     }}
-                    className={`bg-tesseract-light rounded-xl shadow-tesseract hover:shadow-glow transition-all duration-300 ${
+                    className={`bg-tesseract-light/90 backdrop-blur-sm rounded-xl shadow-2xl hover:shadow-2xl transition-all duration-300 border border-tesseract-sand/30 hover:border-tesseract-bronze/50 group ${
                       tier.tier === "Title Sponsor" 
                         ? "p-12" 
                         : tier.tier === "Gold Sponsors"
@@ -138,27 +191,39 @@ const SponsorsSection = () => {
                     }`}
                   >
                     <div className="flex items-center justify-center h-16 mb-4">
-                      <img 
+                      <motion.img 
                         src={sponsorLogos[Math.floor(Math.random() * sponsorLogos.length)]}
                         alt={sponsor}
-                        className={`rounded-lg object-contain ${
+                        className={`rounded-lg object-contain transition-all duration-300 group-hover:scale-110 ${
                           tier.tier === "Title Sponsor" 
                             ? "w-16 h-16" 
                             : tier.tier === "Gold Sponsors"
                             ? "w-12 h-12"
                             : "w-10 h-10"
                         }`}
+                        style={{ 
+                          filter: 'drop-shadow(1px 1px 2px rgba(255,255,255,0.8))' 
+                        }}
+                        whileHover={{ rotate: 5 }}
                       />
                     </div>
-                    <h4 className={`font-semibold text-tesseract-dark text-center ${
-                      tier.tier === "Title Sponsor" 
-                        ? "text-xl" 
-                        : tier.tier === "Gold Sponsors"
-                        ? "text-lg"
-                        : "text-sm"
-                    }`}>
+                    <h4 
+                      className={`font-semibold text-tesseract-dark text-center group-hover:text-tesseract-bronze transition-colors ${
+                        tier.tier === "Title Sponsor" 
+                          ? "text-xl" 
+                          : tier.tier === "Gold Sponsors"
+                          ? "text-lg"
+                          : "text-sm"
+                      }`}
+                      style={{ 
+                        textShadow: '0.5px 0.5px 1px rgba(255,255,255,0.8)' 
+                      }}
+                    >
                       {sponsor}
                     </h4>
+                    
+                    {/* Subtle gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-tesseract-bronze/5 via-transparent to-tesseract-light/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
                   </motion.div>
                 ))}
               </div>
@@ -174,19 +239,32 @@ const SponsorsSection = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <div className="bg-tesseract-cream/50 rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-tesseract-dark mb-4">
+          <div className="bg-tesseract-light/80 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto shadow-2xl border border-tesseract-sand/30">
+            <h3 
+              className="text-2xl font-bold text-tesseract-dark mb-4"
+              style={{ 
+                textShadow: '1px 1px 2px rgba(255,255,255,0.8)' 
+              }}
+            >
               Become a Sponsor
             </h3>
-            <p className="text-tesseract-dark mb-6">
+            <p 
+              className="text-tesseract-bronze mb-6 font-medium"
+              style={{ 
+                textShadow: '0.5px 0.5px 1px rgba(255,255,255,0.8)' 
+              }}
+            >
               Join us in shaping the future of technology. Partner with Tesseract 2025 
               and showcase your innovation to the next generation.
             </p>
             <motion.button
-              className="bg-tesseract-dark text-tesseract-cream hover:bg-tesseract-bronze px-8 py-3 rounded-xl font-semibold shadow-tesseract hover:shadow-glow transition-all duration-300"
+              className="bg-gradient-to-r from-tesseract-bronze to-tesseract-dark text-tesseract-light hover:from-tesseract-dark hover:to-tesseract-bronze px-8 py-3 rounded-xl font-semibold shadow-2xl hover:shadow-2xl transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => console.log("Sponsor inquiry")}
+              style={{ 
+                textShadow: '1px 1px 2px rgba(0,0,0,0.3)' 
+              }}
             >
               Partner With Us
             </motion.button>

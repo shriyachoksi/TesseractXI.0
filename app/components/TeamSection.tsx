@@ -1,7 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
-
 
 interface TeamMember {
   name: string;

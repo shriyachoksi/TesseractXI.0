@@ -96,7 +96,8 @@ const galleryCategories = [
     title: "Heritage & Foundations", 
     subtitle: "Glimpse of the Past",
     icon: Clock,
-    color: "bg-gradient-to-br from-tesseract-bronze/90 to-tesseract-dark/80",
+    color: "bg-gradient-to-br from-tesseract-bronze to-tesseract-dark",
+    hoverColor: "bg-gradient-to-br from-tesseract-bronze/80 to-tesseract-dark/90",
     accent: "bg-tesseract-bronze"
   },
   { 
@@ -104,7 +105,8 @@ const galleryCategories = [
     title: "Innovation & Connectivity", 
     subtitle: "The Present",
     icon: Cpu,
-    color: "bg-gradient-to-br from-tesseract-sand/90 to-tesseract-bronze/70",
+    color: "bg-gradient-to-br from-tesseract-sand to-tesseract-bronze",
+    hoverColor: "bg-gradient-to-br from-tesseract-sand/80 to-tesseract-bronze/90",
     accent: "bg-tesseract-sand"
   },
   { 
@@ -112,7 +114,8 @@ const galleryCategories = [
     title: "Visionary & Futuristic", 
     subtitle: "Beyond Reality",
     icon: Sparkles,
-    color: "bg-gradient-to-br from-tesseract-cream/90 to-tesseract-sand/80",
+    color: "bg-gradient-to-br from-tesseract-cream to-tesseract-sand",
+    hoverColor: "bg-gradient-to-br from-tesseract-cream/80 to-tesseract-sand/90",
     accent: "bg-tesseract-cream"
   }
 ];
@@ -264,7 +267,10 @@ const Gallery = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-6xl lg:text-8xl font-black text-tesseract-dark mb-6 tracking-tight drop-shadow-sm"
+              className="text-6xl lg:text-8xl font-black text-tesseract-dark mb-6 tracking-tight drop-shadow-lg"
+              style={{ 
+                textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(66,48,31,0.3)' 
+              }}
             >
               GALLERY
             </motion.h1>
@@ -273,7 +279,10 @@ const Gallery = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-xl lg:text-2xl text-tesseract-bronze font-medium max-w-3xl mx-auto leading-relaxed mb-8"
+              className="text-xl lg:text-2xl text-tesseract-dark font-semibold max-w-3xl mx-auto leading-relaxed mb-8"
+              style={{ 
+                textShadow: '1px 1px 2px rgba(255,255,255,0.9)' 
+              }}
             >
               Witness the Evolution Through Technologies - From Heritage to Future Innovations
             </motion.p>
@@ -318,8 +327,8 @@ const Gallery = () => {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`relative p-8 rounded-3xl text-left overflow-hidden group transition-all duration-500 ${
                     selectedCategory === category.id
-                      ? `${category.color} shadow-2xl transform scale-105 border-2 border-tesseract-dark/20`
-                      : "bg-tesseract-cream/70 hover:bg-tesseract-cream shadow-lg hover:shadow-xl border-2 border-tesseract-sand/30"
+                      ? `${category.color} shadow-2xl transform scale-105 border-2 border-tesseract-dark/30`
+                      : "bg-tesseract-cream hover:bg-tesseract-sand shadow-lg hover:shadow-xl border-2 border-tesseract-bronze/20 hover:border-tesseract-bronze/40"
                   }`}
                   whileHover={{ y: -8 }}
                   whileTap={{ scale: 0.95 }}
@@ -329,7 +338,7 @@ const Gallery = () => {
                 >
                   {/* Animated Background Pattern */}
                   <motion.div
-                    className="absolute inset-0 opacity-10"
+                    className="absolute inset-0 opacity-5"
                     style={{
                       backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
                       backgroundSize: '20px 20px'
@@ -342,15 +351,15 @@ const Gallery = () => {
 
                   <div className="relative z-10">
                     <div className="flex items-center mb-4">
-                      <div className={`p-3 rounded-2xl ${selectedCategory === category.id ? 'bg-tesseract-light/90' : 'bg-tesseract-sand/50'} mr-4`}>
+                      <div className={`p-3 rounded-2xl ${selectedCategory === category.id ? 'bg-tesseract-light/95 shadow-lg' : 'bg-tesseract-light/80 group-hover:bg-tesseract-light/95 group-hover:shadow-md'} mr-4 transition-all duration-300`}>
                         <category.icon className={`w-8 h-8 ${
-                          selectedCategory === category.id ? "text-tesseract-dark" : "text-tesseract-bronze"
-                        }`} />
+                          selectedCategory === category.id ? "text-tesseract-dark" : "text-tesseract-bronze group-hover:text-tesseract-dark"
+                        } transition-colors duration-300`} />
                       </div>
                       {selectedCategory === category.id && (
                         <motion.div
                           layoutId="activeIndicator"
-                          className="w-3 h-3 bg-tesseract-light rounded-full"
+                          className="w-3 h-3 bg-tesseract-light rounded-full shadow-lg"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -358,13 +367,13 @@ const Gallery = () => {
                       )}
                     </div>
                     
-                    <h3 className={`text-2xl font-bold mb-3 ${
-                      selectedCategory === category.id ? "text-tesseract-light" : "text-tesseract-dark"
+                    <h3 className={`text-2xl font-bold mb-3 transition-colors duration-300 ${
+                      selectedCategory === category.id ? "text-tesseract-light" : "text-tesseract-dark group-hover:text-tesseract-dark"
                     }`}>
                       {category.title}
                     </h3>
-                    <p className={`text-sm font-medium ${
-                      selectedCategory === category.id ? "text-tesseract-cream/90" : "text-tesseract-bronze"
+                    <p className={`text-sm font-medium transition-colors duration-300 ${
+                      selectedCategory === category.id ? "text-tesseract-cream/95" : "text-tesseract-bronze group-hover:text-tesseract-dark/80"
                     }`}>
                       {category.subtitle}
                     </p>
@@ -428,14 +437,14 @@ const Gallery = () => {
                       onLoadStart={() => setLoadingImages(prev => ({...prev, [image.id]: true}))}
                     />
 
-                    {/* Enhanced Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-tesseract-dark/90 via-tesseract-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    {/* Enhanced Overlay with better colors */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-tesseract-dark/95 via-tesseract-bronze/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <motion.h3 
                           initial={{ y: 20, opacity: 0 }}
                           whileHover={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.1 }}
-                          className="text-tesseract-light font-bold text-xl mb-2"
+                          className="text-tesseract-light font-bold text-xl mb-2 drop-shadow-lg"
                         >
                           {image.title}
                         </motion.h3>
@@ -443,7 +452,7 @@ const Gallery = () => {
                           initial={{ y: 20, opacity: 0 }}
                           whileHover={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.2 }}
-                          className="text-tesseract-cream text-sm"
+                          className="text-tesseract-cream text-sm drop-shadow-md"
                         >
                           {image.description}
                         </motion.p>
@@ -452,23 +461,23 @@ const Gallery = () => {
 
                     {/* Floating Elements */}
                     <motion.div
-                      className="absolute top-6 right-6 w-4 h-4 bg-tesseract-bronze/80 rounded-full"
+                      className="absolute top-6 right-6 w-4 h-4 bg-tesseract-bronze rounded-full shadow-lg"
                       animate={{
                         scale: [1, 1.2, 1],
-                        opacity: [0.7, 1, 0.7]
+                        opacity: [0.8, 1, 0.8]
                       }}
                       transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
                     />
 
                     {/* Type Badge */}
                     <div className="absolute top-6 left-6">
-                      <span className="px-4 py-2 bg-tesseract-light/95 text-tesseract-dark text-xs font-bold rounded-full border border-tesseract-sand/50 shadow-lg">
+                      <span className="px-4 py-2 bg-tesseract-light/98 text-tesseract-dark text-xs font-bold rounded-full border border-tesseract-bronze/30 shadow-lg backdrop-blur-sm">
                         {image.type.toUpperCase()}
                       </span>
                     </div>
 
-                    {/* Hover Glow Effect */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-tesseract-bronze/0 via-tesseract-sand/0 to-tesseract-cream/0 group-hover:from-tesseract-bronze/10 group-hover:via-tesseract-sand/10 group-hover:to-tesseract-cream/10 transition-all duration-500" />
+                    {/* Attractive Hover Glow Effect */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-tesseract-bronze/0 via-tesseract-sand/0 to-tesseract-bronze/0 group-hover:from-tesseract-bronze/20 group-hover:via-tesseract-sand/15 group-hover:to-tesseract-bronze/20 transition-all duration-500" />
                   </div>
                 </motion.div>
               ))}

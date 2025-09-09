@@ -16,25 +16,25 @@ const techShowcases: TechShowcase[] = [
     icon: Brain,
     title: "AI & Robotics",
     description: "Experience next-gen AI and autonomous robots in action",
-    color: "from-violet-500/20 to-purple-500/20"
+    color: "from-tesseract-bronze/20 to-tesseract-sand/30"
   },
   {
     icon: Network,
     title: "Metaverse Lab",
     description: "Dive into immersive VR/AR experiences and virtual worlds",
-    color: "from-cyan-500/20 to-blue-500/20"
+    color: "from-tesseract-sand/20 to-tesseract-cream/30"
   },
   {
     icon: Cpu,
     title: "Tech Battles",
     description: "Compete in coding, robotics, and gaming tournaments",
-    color: "from-rose-500/20 to-pink-500/20"
+    color: "from-tesseract-cream/20 to-tesseract-light/30"
   },
   {
     icon: Atom,
     title: "Innovation Hub",
     description: "Student projects pushing technological boundaries",
-    color: "from-emerald-500/20 to-green-500/20"
+    color: "from-tesseract-bronze/30 to-tesseract-sand/20"
   }
 ];
 
@@ -51,16 +51,35 @@ const TechShowcaseSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="py-20 relative overflow-hidden"
+      className="py-20 relative overflow-hidden bg-gradient-to-br from-tesseract-cream/40 via-tesseract-light/80 to-tesseract-sand/50"
     >
-      {/* Dynamic Background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-reveal"
-        style={{
-          y: backgroundY,
-          scale: backgroundScale,
-        }}
-      />
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-20 left-1/4 w-48 h-48 bg-tesseract-bronze/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 40, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-1/4 w-36 h-36 bg-tesseract-sand/15 rounded-full blur-3xl"
+          animate={{
+            x: [0, -25, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <motion.div
@@ -69,10 +88,20 @@ const TechShowcaseSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-tesseract-dark mb-4">
+          <h2 
+            className="text-4xl md:text-6xl font-bold text-tesseract-dark mb-4"
+            style={{ 
+              textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(66,48,31,0.2)' 
+            }}
+          >
             Future Technologies
           </h2>
-          <p className="text-xl text-tesseract-bronze max-w-3xl mx-auto">
+          <p 
+            className="text-xl text-tesseract-bronze max-w-3xl mx-auto font-medium"
+            style={{ 
+              textShadow: '1px 1px 2px rgba(255,255,255,0.8)' 
+            }}
+          >
             Exploring the cutting-edge innovations shaping tomorrow
           </p>
         </motion.div>
@@ -87,32 +116,60 @@ const TechShowcaseSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <motion.div
-                className="group relative bg-tesseract-light/80 backdrop-blur-sm p-8 rounded-2xl shadow-tesseract overflow-hidden hover:bg-white transition-colors duration-300"
-                whileHover={{ scale: 1.02 }}
+                className="group relative bg-tesseract-light/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl overflow-hidden border border-tesseract-sand/30 hover:border-tesseract-bronze/50 transition-all duration-300"
+                whileHover={{ scale: 1.02, y: -5 }}
               >
                 {/* Background Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <tech.icon className="w-12 h-12 text-tesseract-bronze mb-6" />
-                  <h3 className="text-2xl font-bold text-tesseract-dark mb-3">{tech.title}</h3>
-                  <p className="text-tesseract-bronze">{tech.description}</p>
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-6"
+                  >
+                    <tech.icon 
+                      className="w-12 h-12 text-tesseract-bronze group-hover:text-tesseract-dark transition-colors" 
+                      style={{ 
+                        filter: 'drop-shadow(1px 1px 2px rgba(255,255,255,0.8))' 
+                      }}
+                    />
+                  </motion.div>
+                  <h3 
+                    className="text-2xl font-bold text-tesseract-dark mb-3 group-hover:text-tesseract-bronze transition-colors"
+                    style={{ 
+                      textShadow: '1px 1px 2px rgba(255,255,255,0.8)' 
+                    }}
+                  >
+                    {tech.title}
+                  </h3>
+                  <p 
+                    className="text-tesseract-bronze font-medium leading-relaxed"
+                    style={{ 
+                      textShadow: '0.5px 0.5px 1px rgba(255,255,255,0.8)' 
+                    }}
+                  >
+                    {tech.description}
+                  </p>
                 </div>
 
                 {/* Interactive Elements */}
                 <motion.div
-                  className="absolute top-4 right-4 w-24 h-24 rounded-full bg-gradient-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute top-4 right-4 w-16 h-16 rounded-full bg-gradient-to-r from-tesseract-bronze/20 to-tesseract-sand/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 90, 0],
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 180, 360],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "linear"
                   }}
                 />
+                
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-tesseract-bronze/5 via-transparent to-tesseract-light/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
               </motion.div>
             </motion.div>
           ))}
