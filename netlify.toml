@@ -1,0 +1,11 @@
+[build]
+  command = "pnpm --filter tesseract-next-app build"
+  publish = "next-app/.next"
+
+
+[functions]
+  node_bundler = "esbuild"
+  
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

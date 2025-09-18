@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///D:/Hackathon%20Test/TesseractXI.0/app/page.tsx"],"sourcesContent":["import React from \"react\";\r\n\r\nexport default function Home() {\r\n  return <div>Hello World</div>;\r\n}\r\n"],"names":[],"mappings":";;;;;;AAEe,SAAS;IACtB,qBAAO,6WAAC;kBAAI;;;;;;AACd","debugId":null}}]
+}

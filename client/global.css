@@ -1,0 +1,122 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@600;700;800&family=Russo+One&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * Keep HSL numeric values in variables (no hsl() wrapper).
+  */
+  :root {
+    /* Beige Neutrals Theme */
+    --background: 30 45% 92%; /* #F4EBE2 */
+    --foreground: 31 46% 34%; /* #7D572E */
+
+    --card: 30 42% 83%; /* #E6D4C2 */
+    --card-foreground: 31 46% 34%;
+
+    --popover: 30 42% 83%;
+    --popover-foreground: 31 46% 34%;
+
+    --primary: 30 27% 52%; /* #A68563 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 33% 69%; /* #CBB197 */
+    --secondary-foreground: 31 46% 34%;
+
+    --muted: 30 42% 83%;
+    --muted-foreground: 30 27% 52%;
+
+    --accent: 30 33% 69%; /* #CBB197 */
+    --accent-foreground: 31 46% 34%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 33% 69%;
+    --input: 30 33% 69%;
+    --ring: 30 27% 52%;
+
+    --radius: 0.8rem;
+
+    /* Sidebar */
+    --sidebar-background: 30 45% 92%;
+    --sidebar-foreground: 31 46% 34%;
+    --sidebar-primary: 30 27% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 33% 69%;
+    --sidebar-accent-foreground: 31 46% 34%;
+    --sidebar-border: 30 33% 69%;
+    --sidebar-ring: 30 27% 52%;
+  }
+
+  .dark {
+    /* Beige Neutrals Theme (dark) */
+    --background: 31 46% 34%; /* #7D572E */
+    --foreground: 30 45% 92%; /* #F4EBE2 */
+
+    --card: 30 27% 52%;
+    --card-foreground: 30 45% 92%;
+
+    --popover: 30 27% 52%;
+    --popover-foreground: 30 45% 92%;
+
+    --primary: 30 42% 83%;
+    --primary-foreground: 31 46% 34%;
+
+    --secondary: 30 33% 69%;
+    --secondary-foreground: 31 46% 34%;
+
+    --muted: 30 27% 52%;
+    --muted-foreground: 30 42% 83%;
+
+    --accent: 30 42% 83%;
+    --accent-foreground: 31 46% 34%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 27% 52%;
+    --input: 30 27% 52%;
+    --ring: 30 42% 83%;
+
+    --sidebar-background: 31 46% 34%;
+    --sidebar-foreground: 30 45% 92%;
+    --sidebar-primary: 30 42% 83%;
+    --sidebar-primary-foreground: 31 46% 34%;
+    --sidebar-accent: 30 33% 69%;
+    --sidebar-accent-foreground: 31 46% 34%;
+    --sidebar-border: 30 27% 52%;
+    --sidebar-ring: 30 42% 83%;
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    @apply text-primary;
+  }
+
+  .font-tech {
+    font-family: "Orbitron", "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    letter-spacing: 0.015em;
+  }
+
+  .font-title {
+    font-family: "Russo One", "Orbitron", "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    letter-spacing: 0.03em;
+  }
+}
