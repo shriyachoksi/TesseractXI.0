@@ -59,6 +59,7 @@ import HeroSection from "@/app/components/HeroSection";
 import VideoSection from "@/app/components/VideoSection";
 import TimelineSection from "@/app/components/TimelineSection";
 import TechShowcaseSection from "@/app/components/TechShowcaseSection";
+import GalleryPreview from "@/app/components/GalleryPreview";
 import TeamSection from "@/app/components/TeamSection";
 import SponsorsSection from "@/app/components/SponsorsSection";
 import Footer from "@/app/components/Footer";
@@ -102,6 +103,9 @@ const HomePage = () => {
         
         {/* Tech Showcase Section */}
         <TechShowcaseSection />
+
+  {/* Gallery Preview Section */}
+  <GalleryPreview />
 
         {/* Team Section */}
         <TeamSection />

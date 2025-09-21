@@ -52,7 +52,7 @@ const teamMembers: TeamMember[] = [
 
 const TeamSection = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-tesseract-cream/20" id="team">
+    <section className="py-24 bg-gradient-to-b from-dark to-tesseract-dark" id="team">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
