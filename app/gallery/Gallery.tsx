@@ -55,9 +55,8 @@
  */
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowLeft, Clock, Cpu, Sparkles } from "lucide-react";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 
 // Simple Button component
@@ -90,37 +89,10 @@ const Button = ({
   );
 };
 
-const galleryCategories = [
-  { 
-    id: "past", 
-    title: "Heritage & Foundations", 
-    subtitle: "Glimpse of the Past",
-    icon: Clock,
-    color: "bg-gradient-to-br from-tesseract-bronze to-tesseract-dark",
-    hoverColor: "bg-gradient-to-br from-tesseract-bronze/80 to-tesseract-dark/90",
-    accent: "bg-tesseract-bronze"
-  },
-  { 
-    id: "present", 
-    title: "Innovation & Connectivity", 
-    subtitle: "The Present",
-    icon: Cpu,
-    color: "bg-gradient-to-br from-tesseract-sand to-tesseract-bronze",
-    hoverColor: "bg-gradient-to-br from-tesseract-sand/80 to-tesseract-bronze/90",
-    accent: "bg-tesseract-sand"
-  },
-  { 
-    id: "future", 
-    title: "Visionary & Futuristic", 
-    subtitle: "Beyond Reality",
-    icon: Sparkles,
-    color: "bg-gradient-to-br from-tesseract-cream to-tesseract-sand",
-    hoverColor: "bg-gradient-to-br from-tesseract-cream/80 to-tesseract-sand/90",
-    accent: "bg-tesseract-cream"
-  }
-];
+// Category selection UI removed; keep images grouped internally but render all together
 
-const galleryImages = {
+// Base curated images per category
+const baseGalleryImages = {
   past: [
     { id: 1, title: "First Computers", description: "Early Computing History", type: "image", src: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg" },
     { id: 2, title: "Vintage Technology", description: "Classic Computing Era", type: "image", src: "https://images.pexels.com/photos/163125/board-electronics-computer-data-processing-163125.jpeg" },
@@ -159,10 +131,74 @@ const galleryImages = {
   ]
 };
 
+// Helper to generate many unique, reliable placeholder images (vary heights for masonry)
+const generateDummyImages = (categoryKey: string, startId: number, count: number) => {
+  const items = [] as { id: number; title: string; description: string; type: string; src: string }[];
+  for (let i = 0; i < count; i++) {
+    const id = startId + i;
+    const seed = `${categoryKey}-${id}`;
+    const width = 1200;
+    // produce variable heights for a better masonry look
+    const height = 700 + ((id % 6) * 80); // 700..1100
+    items.push({
+      id,
+      title: `${categoryKey.toUpperCase()} Concept ${i + 1}`,
+      description: `Exploration ${i + 1} in the ${categoryKey} series`,
+      type: "image",
+      // picsum with seed is stable and avoids 404s
+      src: `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`,
+    });
+  }
+  return items;
+};
+
+// Final galleryImages with expanded dummy items for better layout preview
+const galleryImages = {
+  past: [
+    ...baseGalleryImages.past,
+    ...generateDummyImages("past", 1001, 60),
+  ],
+  present: [
+    ...baseGalleryImages.present,
+    ...generateDummyImages("present", 2001, 60),
+  ],
+  future: [
+    ...baseGalleryImages.future,
+    ...generateDummyImages("future", 3001, 60),
+  ],
+};
+
 const Gallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState("past");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
+  // Decade filter removed: always show all images in one page
+
+  // Shared data for both Masonry and Carousel (assign eras deterministically)
+  const decadesList = useMemo(() => [
+    "1960s",
+    "1970s",
+    "1980s",
+    "1990s",
+    "2000s",
+    "2010s",
+    "2020s",
+  ], []);
+
+  // Show exactly 45 images: 15 from each category for balance
+  const allImages = useMemo(() => {
+    const perCategory = 15;
+    const categories = ["past", "present", "future"] as const;
+    return categories.flatMap((cat) => galleryImages[cat].slice(0, perCategory));
+  }, []);
+
+  const imagesWithDecade = useMemo(
+    () => allImages.map((img, idx) => ({ ...img, decade: decadesList[idx % decadesList.length] })),
+    [allImages, decadesList]
+  );
+
+  // Carousel removed; no representatives needed
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -220,18 +256,7 @@ const Gallery = () => {
     }
   };
   
-  const categoryVariants = {
-    initial: { scale: 1 },
-    hover: { 
-      scale: 1.05,
-      transition: {
-        type: "spring" as const,
-        damping: 15,
-        stiffness: 200
-      }
-    },
-    tap: { scale: 0.95 }
-  };
+  // Category button variants removed with UI
 
   return (
     <div className="min-h-screen bg-tesseract-light">
@@ -242,7 +267,7 @@ const Gallery = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative py-24 px-8 bg-gradient-to-br from-tesseract-light via-tesseract-cream/50 to-tesseract-sand/30 overflow-hidden"
+          className="relative py-24 px-8 bg-gradient-to-br from-tesseract-light via-tesseract-cream to-tesseract-sand overflow-hidden"
         >
           {/* Enhanced Floating Background Elements */}
           <div className="absolute inset-0 pointer-events-none">
@@ -293,199 +318,97 @@ const Gallery = () => {
               transition={{ delay: 1, duration: 0.6 }}
               className="mt-8"
             >
-              <Link href="/">
+              {/* <Link href="/">
                 <Button variant="outline" className="bg-tesseract-light/90 border-2 border-tesseract-bronze text-tesseract-dark hover:bg-tesseract-cream hover:border-tesseract-dark transition-all duration-300 shadow-lg hover:shadow-xl px-6 py-3">
                   <ArrowLeft className="w-5 h-5 mr-2" />
                   Back to Home
                 </Button>
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
         </motion.section>
 
-        {/* Category Selection */}
-        <section className="py-16 px-8 bg-gradient-to-b from-tesseract-cream/30 to-tesseract-light">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-6xl mx-auto"
-          >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl font-bold text-tesseract-dark text-center mb-12"
-            >
-              Explore by Era
-            </motion.h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {galleryCategories.map((category, index) => (
-                <motion.button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`relative p-8 rounded-3xl text-left overflow-hidden group transition-all duration-500 ${
-                    selectedCategory === category.id
-                      ? `${category.color} shadow-2xl transform scale-105 border-2 border-tesseract-dark/30`
-                      : "bg-tesseract-cream hover:bg-tesseract-sand shadow-lg hover:shadow-xl border-2 border-tesseract-bronze/20 hover:border-tesseract-bronze/40"
-                  }`}
-                  whileHover={{ y: -8 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  {/* Animated Background Pattern */}
-                  <motion.div
-                    className="absolute inset-0 opacity-5"
-                    style={{
-                      backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
-                      backgroundSize: '20px 20px'
-                    }}
-                    animate={{
-                      backgroundPosition: selectedCategory === category.id ? ['0px 0px', '20px 20px'] : '0px 0px'
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  <div className="relative z-10">
-                    <div className="flex items-center mb-4">
-                      <div className={`p-3 rounded-2xl ${selectedCategory === category.id ? 'bg-tesseract-light/95 shadow-lg' : 'bg-tesseract-light/80 group-hover:bg-tesseract-light/95 group-hover:shadow-md'} mr-4 transition-all duration-300`}>
-                        <category.icon className={`w-8 h-8 ${
-                          selectedCategory === category.id ? "text-tesseract-dark" : "text-tesseract-bronze group-hover:text-tesseract-dark"
-                        } transition-colors duration-300`} />
-                      </div>
-                      {selectedCategory === category.id && (
-                        <motion.div
-                          layoutId="activeIndicator"
-                          className="w-3 h-3 bg-tesseract-light rounded-full shadow-lg"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                        />
-                      )}
-                    </div>
-                    
-                    <h3 className={`text-2xl font-bold mb-3 transition-colors duration-300 ${
-                      selectedCategory === category.id ? "text-tesseract-light" : "text-tesseract-dark group-hover:text-tesseract-dark"
-                    }`}>
-                      {category.title}
-                    </h3>
-                    <p className={`text-sm font-medium transition-colors duration-300 ${
-                      selectedCategory === category.id ? "text-tesseract-cream/95" : "text-tesseract-bronze group-hover:text-tesseract-dark/80"
-                    }`}>
-                      {category.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Hover Effect Accent */}
-                  <motion.div
-                    className={`absolute bottom-0 left-0 right-0 h-1 ${category.accent}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: selectedCategory === category.id ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        </section>
+        {/* Category Selection removed: single-page gallery */}
 
         {/* Gallery Grid */}
-        <section className="py-20 px-8 bg-gradient-to-b from-tesseract-light to-tesseract-cream/50">
+  <section className="py-20 px-8 bg-gradient-to-b from-tesseract-light to-tesseract-cream">
           <motion.div
             className="max-w-7xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            key={selectedCategory}
           >
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-3xl font-bold text-tesseract-dark text-center mb-12 capitalize"
             >
-              {galleryCategories.find(cat => cat.id === selectedCategory)?.title} Collection
+              Timeless Moments: A Tesseract Chronicle
             </motion.h3>
+
+            {/* Single view: Masonry Grid */}
+
+            {/* Decade Filters removed: showing all images on a single page */}
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {galleryImages[selectedCategory as keyof typeof galleryImages].map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  variants={itemVariants}
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedImage(image.id)}
-                  whileHover={{ scale: 1.03, rotateY: 5 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <div className="relative h-80 bg-gradient-to-br from-tesseract-sand/20 to-tesseract-bronze/20 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-tesseract-sand/30">
-                    {/* Loading State */}
-                    {loadingImages[image.id] && (
-                      <div className="absolute inset-0 bg-tesseract-cream/50 animate-pulse flex items-center justify-center">
-                        <div className="w-10 h-10 border-3 border-tesseract-bronze rounded-full animate-spin border-t-transparent" />
-                      </div>
-                    )}
-                    
-                    {/* Actual Image */}
-                    <img 
-                      src={image.src} 
-                      alt={image.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                      style={{ opacity: loadingImages[image.id] ? 0 : 1 }}
-                      onLoad={() => setLoadingImages(prev => ({...prev, [image.id]: false}))}
-                      onLoadStart={() => setLoadingImages(prev => ({...prev, [image.id]: true}))}
-                    />
-
-                    {/* Enhanced Overlay with better colors */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-tesseract-dark/95 via-tesseract-bronze/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <motion.h3 
-                          initial={{ y: 20, opacity: 0 }}
-                          whileHover={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.1 }}
-                          className="text-tesseract-light font-bold text-xl mb-2 drop-shadow-lg"
-                        >
-                          {image.title}
-                        </motion.h3>
-                        <motion.p 
-                          initial={{ y: 20, opacity: 0 }}
-                          whileHover={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.2 }}
-                          className="text-tesseract-cream text-sm drop-shadow-md"
-                        >
-                          {image.description}
-                        </motion.p>
-                      </div>
-                    </div>
-
-                    {/* Floating Elements */}
-                    <motion.div
-                      className="absolute top-6 right-6 w-4 h-4 bg-tesseract-bronze rounded-full shadow-lg"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.8, 1, 0.8]
+            {/* Masonry Grid (Pinterest-style) with abstract dotted background */}
+            {(() => {
+              return (
+                <div className="relative">
+                  {/* Abstract dotted background behind grid */}
+                  <div className="absolute inset-0 -z-10 opacity-40 pointer-events-none">
+                    <div
+                      className="w-full h-full"
+                      style={{
+                        backgroundImage: `radial-gradient(rgba(66,48,31,0.12) 1px, transparent 1px)`,
+                        backgroundSize: "18px 18px",
                       }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
                     />
-
-                    {/* Type Badge */}
-                    <div className="absolute top-6 left-6">
-                      <span className="px-4 py-2 bg-tesseract-light/98 text-tesseract-dark text-xs font-bold rounded-full border border-tesseract-bronze/30 shadow-lg backdrop-blur-sm">
-                        {image.type.toUpperCase()}
-                      </span>
-                    </div>
-
-                    {/* Attractive Hover Glow Effect */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-tesseract-bronze/0 via-tesseract-sand/0 to-tesseract-bronze/0 group-hover:from-tesseract-bronze/20 group-hover:via-tesseract-sand/15 group-hover:to-tesseract-bronze/20 transition-all duration-500" />
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                  <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+                    {imagesWithDecade.map((image, index) => (
+                      <motion.div
+                        key={image.id}
+                        variants={itemVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: false, amount: 0.15 }}
+                        className="mb-6 break-inside-avoid group cursor-pointer rounded-2xl overflow-hidden border border-tesseract-sand/30 bg-white shadow-sm hover:shadow-xl transition-shadow"
+                        onClick={() => setSelectedImage(image.id)}
+                      >
+                        <div className="relative w-full">
+                          {/* Loading State */}
+                          {loadingImages[image.id] && (
+                            <div className="absolute inset-0 bg-tesseract-cream/50 animate-pulse flex items-center justify-center z-10">
+                              <div className="w-10 h-10 border-3 border-tesseract-bronze rounded-full animate-spin border-t-transparent" />
+                            </div>
+                          )}
+
+                          {/* Image */}
+                          <img
+                            src={image.src}
+                            alt={image.title}
+                            className="w-full h-auto object-cover transition duration-300 transform filter grayscale group-hover:grayscale-0 group-hover:scale-105"
+                            style={{ opacity: loadingImages[image.id] ? 0.6 : 1 }}
+                            onLoad={() => setLoadingImages(prev => ({ ...prev, [image.id]: false }))}
+                            onLoadStart={() => setLoadingImages(prev => ({ ...prev, [image.id]: true }))}
+                          />
+                          {/* Caption overlay */}
+                          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
+                            <div className="text-sm font-semibold line-clamp-1">{image.title}</div>
+                            <div className="text-xs text-tesseract-cream/90 line-clamp-2">{image.description}</div>
+                            <div className="mt-1 text-[10px] uppercase tracking-wide text-tesseract-cream/70">{(image as any).decade}</div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </motion.div>
         </section>
 
-        {/* Enhanced Modal for Image Preview */}
+        {/* Enhanced Modal for Image Preview (refined layout & readability) */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
@@ -496,69 +419,75 @@ const Gallery = () => {
               onClick={() => setSelectedImage(null)}
             >
               <motion.div
-                className="bg-gradient-to-br from-tesseract-light to-tesseract-cream rounded-3xl p-8 max-w-3xl w-full shadow-2xl relative border border-tesseract-sand/30"
+                className="relative max-w-3xl w-full rounded-3xl border border-tesseract-sand/30 bg-transparent backdrop-blur-xl shadow-2xl p-6 md:p-8 max-h-[85vh] overflow-auto text-tesseract-light"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Enhanced Close Button */}
-                <motion.button
-                  onClick={() => setSelectedImage(null)}
-                  className="absolute top-6 right-6 w-10 h-10 bg-tesseract-bronze/10 hover:bg-tesseract-bronze/20 text-tesseract-dark hover:text-tesseract-bronze rounded-full flex items-center justify-center text-xl font-bold focus:outline-none transition-all duration-200 border border-tesseract-sand/30"
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label="Close"
-                >
-                  ×
-                </motion.button>
-                
                 {(() => {
                   const image = Object.values(galleryImages)
                     .flat()
                     .find(img => img.id === selectedImage);
                   return image ? (
-                    <div className="text-center">
-                      <motion.div 
-                        className="h-96 rounded-2xl mb-8 overflow-hidden shadow-xl border border-tesseract-sand/30"
-                        initial={{ scale: 0.9, opacity: 0 }}
+                    <div>
+                      {/* Header with title and close button (no overlap with image) */}
+                      <div className="flex items-start justify-between gap-4 mb-4 md:mb-6">
+                        <motion.h2
+                          className="text-xl md:text-2xl font-bold text-tesseract-light"
+                          initial={{ y: 10, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {image.title}
+                        </motion.h2>
+                        <motion.button
+                          onClick={() => setSelectedImage(null)}
+                          className="shrink-0 w-10 h-10 bg-tesseract-light/10 hover:bg-tesseract-light/20 text-tesseract-light hover:text-tesseract-cream rounded-full flex items-center justify-center text-xl font-bold focus:outline-none transition-all duration-200 border border-tesseract-cream/30"
+                          whileHover={{ scale: 1.05, rotate: 90 }}
+                          whileTap={{ scale: 0.92 }}
+                          aria-label="Close"
+                        >
+                          ×
+                        </motion.button>
+                      </div>
+
+                      {/* Image area with containment to avoid cropping and overlap */}
+                      <motion.div
+                        className="rounded-2xl overflow-hidden shadow-xl border border-tesseract-sand/30 bg-black"
+                        initial={{ scale: 0.97, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
+                        transition={{ delay: 0.25 }}
                       >
-                        <img 
+                        <img
                           src={image.src}
                           alt={image.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          className="w-full max-h-[70vh] object-contain bg-black"
                         />
                       </motion.div>
-                      
-                      <motion.h2 
-                        className="text-3xl font-bold text-tesseract-dark mb-4"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        {image.title}
-                      </motion.h2>
-                      
-                      <motion.p 
-                        className="text-lg text-tesseract-bronze mb-8 max-w-md mx-auto"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        {image.description}
-                      </motion.p>
-                      
+
+                      {/* Description and actions */}
+                      {image.description && (
+                        <motion.p
+                          className="mt-4 text-sm md:text-base text-tesseract-cream"
+                          initial={{ y: 10, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {image.description}
+                        </motion.p>
+                      )}
+
                       <motion.div
-                        initial={{ y: 20, opacity: 0 }}
+                        className="mt-6"
+                        initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.5 }}
+                        transition={{ delay: 0.35 }}
                       >
                         <Button
                           onClick={() => setSelectedImage(null)}
-                          className="bg-gradient-to-r from-tesseract-bronze to-tesseract-dark text-tesseract-light hover:from-tesseract-dark hover:to-tesseract-bronze transition-all duration-300 px-8 py-3 rounded-2xl shadow-lg"
+                          className="bg-gradient-to-r from-tesseract-bronze to-tesseract-dark text-tesseract-light hover:from-tesseract-dark hover:to-tesseract-bronze transition-all duration-300 px-6 py-3 rounded-2xl shadow-lg"
                         >
                           Close Preview
                         </Button>
