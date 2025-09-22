@@ -63,7 +63,7 @@ export function PreviewSections() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-tesseract-light/60 via-tesseract-cream/40 to-tesseract-sand/60 relative overflow-hidden">
+    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-background via-blue-950/20 to-background">
       {" "}
       {/* Subtle grid background */}
       <div
@@ -89,30 +89,30 @@ export function PreviewSections() {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-black/10 text-neon-cyan border-neon-cyan/20 px-4 py-2">
+          <Badge className="mb-4 bg-blue-500/10 text-neon-cyan border-neon-cyan/20 px-4 py-2 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 mr-2" />
             Explore Tesseract XI.0
           </Badge>
 
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mt-4">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mt-4">
             Get a glimpse into the different facets of our tech ecosystem
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center justify-items-center">
           {sections.map((section, index) => (
             <Card
               key={index}
-              className="group relative p-6 bg-card/30 backdrop-blur-sm border-border/50 hover:border-neon-cyan/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl overflow-hidden"
+              className="group relative p-6 bg-card/30 backdrop-blur-md border-border/50 hover:border-blue-400/40 transition-all duration-500 hover:shadow-[0_10px_40px_rgba(79,140,255,0.25)] overflow-hidden w-full max-w-[320px] md:max-w-[340px]"
               style={{
                 transform: `translateY(${
                   Math.sin((scrollY + index * 100) * 0.001) * 10
                 }px)`,
               }}
             >
-              {/* Hover Glow Effect */}
+              {/* Gradient border glow */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br from-${section.color}/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                className={`pointer-events-none absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-${section.color}/20 via-blue-500/10 to-transparent`}
               />
 
               <div className="relative z-10">
@@ -122,7 +122,7 @@ export function PreviewSections() {
                   {section.icon}
                 </div>
 
-                <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-neon-cyan transition-colors">
+                <h3 className="text-lg font-semibold mb-2 text-foreground tracking-wide">
                   {section.title}
                 </h3>
 
@@ -130,20 +130,22 @@ export function PreviewSections() {
                   {section.description}
                 </p>
 
-                <div className="space-y-2 mb-6">
-                  <div className={`text-2xl font-bold text-${section.color}`}>
+                <div className="flex items-center justify-between gap-3 mb-6">
+                  <div
+                    className={`text-2xl md:text-3xl font-bold text-${section.color}`}
+                  >
                     {section.preview}
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-muted-foreground text-right leading-snug max-w-[58%]">
                     {section.stats}
                   </div>
                 </div>
 
-                <Link href={section.href}>
+                <Link href={section.href} className="block">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className={`w-full group-hover:bg-${section.color}/10 group-hover:text-${section.color} transition-all duration-300`}
+                    className={`w-full rounded-lg bg-transparent hover:bg-${section.color}/10 hover:text-${section.color} border border-transparent hover:border-${section.color}/30 transition-all duration-300`}
                   >
                     Explore
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

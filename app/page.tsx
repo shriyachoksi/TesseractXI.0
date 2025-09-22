@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Navbar } from "@/app/components/navbar";
-import { CursorRevealHero } from "@/components/ui/cursor-reveal-hero";
+import InteractiveHero from "@/components/ui/hero-section";
 import { PreviewSections } from "@/components/ui/preview-sections";
 // import { TechEvolution } from "@/components/ui/tech-evolution";
 import { Footer } from "@/components/ui/footer";
@@ -18,7 +18,7 @@ export default function HomePage() {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 8000); // 8 seconds to show the full loading experience
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -42,12 +42,12 @@ export default function HomePage() {
       />
       <div className="relative z-10">
         <Navbar />
-        <CursorRevealHero />
+        <InteractiveHero />
         <PreviewSections />
         <GalleryPreview />
         {/* <TechEvolution /> */}
         <TeamGlimpse />
-        <SponsorsSection />
+        {/* <SponsorsSection /> */}
 
         <Footer />
       </div>
