@@ -8,7 +8,7 @@ import { PreviewSections } from "@/components/ui/preview-sections";
 import { Footer } from "@/components/ui/footer";
 import { TeamGlimpse } from "@/components/ui/team-glimpse";
 import LoadingScreen from "@/components/ui/loading-screen";
-import SponsorsSection from "@/components/ui/sponserSection";
+// import SponsorsSection from "@/components/ui/sponserSection";
 import GalleryPreview from "@/components/ui/GalleryPreview";
 
 export default function HomePage() {
@@ -18,7 +18,7 @@ export default function HomePage() {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, []);

@@ -375,7 +375,6 @@ export default function LoadingScreen() {
     null
   );
 
-  // Set initial progress for the first icon
   useEffect(() => {
     setProgress(
       Math.min(
@@ -383,7 +382,6 @@ export default function LoadingScreen() {
         Math.round(((currentMilestoneIndex + 1) / techMilestones.length) * 100)
       )
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -435,6 +433,7 @@ export default function LoadingScreen() {
 
   const currentMilestone = techMilestones[currentMilestoneIndex];
   const MilestoneIcon = currentMilestone.icon;
+  const isComplete = progress >= 100;
 
   return (
     <div
@@ -545,8 +544,19 @@ export default function LoadingScreen() {
                 </span>
               </div>
 
-              {false ? (
-                <div />
+              {isComplete ? (
+                <div className="relative z-10 flex items-center justify-center h-full">
+                  <span
+                    className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                    style={{
+                      fontFamily:
+                        'var(--font-orbitron), "Segoe UI", system-ui, -apple-system, sans-serif',
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    TESSERACT XI
+                  </span>
+                </div>
               ) : (
                 <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
                   <MilestoneIcon
