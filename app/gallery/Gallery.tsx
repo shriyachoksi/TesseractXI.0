@@ -58,7 +58,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Clock, Cpu, Sparkles } from "lucide-react";
 import Navbar from "../components/Navbar";
-import { getAllImages45, getGalleryImagesByCategory } from "./data";
+import { getAllImages45, findImageById } from "./data";
 
 // Simple Button component
 const Button = ({ 
@@ -99,24 +99,9 @@ const Gallery = () => {
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
   // Decade filter removed: always show all images in one page
 
-  // Shared data for both Masonry and Carousel (assign eras deterministically)
-  const decadesList = useMemo(() => [
-    "1960s",
-    "1970s",
-    "1980s",
-    "1990s",
-    "2000s",
-    "2010s",
-    "2020s",
-  ], []);
-
-  // Show exactly 45 images: 15 from each category for balance
+  // Show exactly 45 images
   const allImages = useMemo(() => getAllImages45(), []);
-
-  const imagesWithDecade = useMemo(
-    () => allImages.map((img, idx) => ({ ...img, decade: decadesList[idx % decadesList.length] })),
-    [allImages, decadesList]
-  );
+  
 
   // Carousel removed; no representatives needed
 
@@ -287,7 +272,7 @@ const Gallery = () => {
                     />
                   </div>
                   <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-                    {imagesWithDecade.map((image, index) => (
+                    {allImages.map((image, index) => (
                       <motion.div
                         key={image.id}
                         variants={itemVariants}
@@ -318,7 +303,6 @@ const Gallery = () => {
                           <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
                             <div className="text-sm font-semibold line-clamp-1">{image.title}</div>
                             <div className="text-xs text-tesseract-cream/90 line-clamp-2">{image.description}</div>
-                            <div className="mt-1 text-[10px] uppercase tracking-wide text-tesseract-cream/70">{(image as any).decade}</div>
                           </div>
                         </div>
                       </motion.div>
@@ -349,9 +333,7 @@ const Gallery = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
-                  const image = Object.values(getGalleryImagesByCategory())
-                    .flat()
-                    .find(img => img.id === selectedImage);
+                  const image = selectedImage != null ? findImageById(selectedImage) : undefined;
                   return image ? (
                     <div>
                       {/* Header with title and close button (no overlap with image) */}
