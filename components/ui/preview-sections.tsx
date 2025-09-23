@@ -30,7 +30,7 @@ export function PreviewSections() {
       icon: <Users className="h-8 w-8" />,
       color: "neon-cyan",
       href: "/team",
-      preview: "50+ Tech Innovators",
+      preview: "20+ Tech Innovators",
       stats: "Leading experts from top tech companies",
     },
     {
@@ -48,7 +48,7 @@ export function PreviewSections() {
       icon: <Calendar className="h-8 w-8" />,
       color: "neon-pink",
       href: "/events",
-      preview: "15+ Events",
+      preview: "30+ Events",
       stats: "Workshops, hackathons, and tech talks",
     },
     {

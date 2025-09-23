@@ -1,309 +1,150 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import React from "react";
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+const InstagramIcon: React.FC = () => (
+  <svg
+    className="w-5 h-5"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.5" />
+  </svg>
+);
 
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: Github,
-      href: "#",
-      color: "hover:text-neon-blue",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "#",
-      color: "hover:text-neon-purple",
-    },
-    {
-      name: "Twitter",
-      icon: Twitter,
-      href: "#",
-      color: "hover:text-neon-green",
-    },
-  ];
+const LinkedInIcon: React.FC = () => (
+  <svg
+    className="w-5 h-5"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="2" y="3" width="20" height="18" rx="2" />
+    <circle cx="6.5" cy="8" r="1" />
+    <path d="M6.5 11v6" />
+    <path d="M10 11v6" />
+    <path d="M10 13.5c0-1 1-2 2.5-2 1.5 0 2.5 1 2.5 2.5V17" />
+  </svg>
+);
 
-  const quickLinks = [
-    { name: "About", href: "/about" },
-    { name: "Events", href: "/events" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Team", href: "/team" },
-  ];
+const WhatsAppIcon: React.FC = () => (
+  <svg
+    className="w-5 h-5"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.81L2 22l5.42-1.39c1.37.71 2.92 1.12 4.58 1.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zm0 18.26c-1.5 0-2.93-.4-4.2-1.12l-.3-.18-3.12.8.82-3.05-.2-.32a8.38 8.38 0 01-1.28-4.49c0-4.6 3.73-8.33 8.33-8.33s8.33 3.73 8.33 8.33-3.74 8.33-8.33 8.33zm4.51-6.15c-.25-.12-1.47-.72-1.7-.82s-.39-.12-.56.12c-.17.25-.64.82-.79.98s-.29.17-.54.06c-.25-.12-1.06-.39-2.02-1.25s-1.46-1.92-1.63-2.24c-.17-.32-.02-.49.11-.62s.25-.29.37-.44c.12-.14.17-.25.25-.41s.12-.3-.06-.54c-.19-.25-.56-1.35-.76-1.84s-.4-.41-.56-.41h-.54c-.17 0-.44.06-.68.3s-.91.89-.91 2.18.93 2.53 1.06 2.71c.12.17 1.83 2.81 4.45 3.92.63.26 1.12.42 1.51.53.59.18 1.13.15 1.55.09.47-.06 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18s-.25-.12-.5-.24z" />
+  </svg>
+);
 
+export const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-tesseract-darkest via-tesseract-dark to-tesseract-medium/50 border-t-2 border-neon-blue/30 overflow-hidden">
-      {/* Background Patterns */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-neon-blue/10 rounded-full blur-2xl animate-slow-pulse" />
-        <div className="absolute top-20 right-20 w-24 h-24 bg-neon-purple/10 rounded-full blur-2xl animate-slow-pulse delay-75" />
-        <div className="absolute bottom-10 left-1/4 w-28 h-28 bg-neon-green/10 rounded-full blur-2xl animate-slow-pulse delay-150" />
-        <div className="absolute bottom-20 right-1/3 w-20 h-20 bg-neon-orange/10 rounded-full blur-2xl animate-slow-pulse delay-225" />
-      </div>
+    <footer
+      className="bg-black text-gray-300 px-6 md:px-12 lg:px-20 pt-12 md:pt-16 pb-6 md:pb-8"
+      aria-labelledby="footer-heading"
+    >
+      <style>{`
+        .glitch-wrapper { position: relative; cursor: pointer; }
+        .glitch { position: relative; font-weight: 900; color: #f9fafb; letter-spacing: 0.08em; transition: 0.25s ease; }
+        .glitch-wrapper:hover .glitch::before, 
+        .glitch-wrapper:hover .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .glitch-wrapper:hover .glitch::before { left: 2px; text-shadow: -2px 0 #ff00c1; animation: g1 1.8s infinite linear alternate-reverse; }
+        .glitch-wrapper:hover .glitch::after { left: -2px; text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1; animation: g2 1.8s infinite linear alternate-reverse; }
+        @keyframes g1 { 0%{clip-path: inset(10% 0 80% 0);}50%{clip-path: inset(60% 0 10% 0);}100%{clip-path: inset(20% 0 70% 0);} }
+        @keyframes g2 { 0%{clip-path: inset(60% 0 20% 0);}50%{clip-path: inset(10% 0 80% 0);}100%{clip-path: inset(80% 0 5% 0);} }
+      `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Logo & Description */}
-          <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-6"
-            >
-              <div className="flex items-center mb-4">
-                <img
-                  src="/logo/logo_white.png"
-                  alt="Tesseract Logo"
-                  className="h-12 w-12 mr-3"
-                  style={{
-                    filter: "drop-shadow(0 0 8px hsla(var(--neon-blue),0.9))",
-                  }}
-                />
-                <h3
-                  className="text-2xl font-bold text-neon-green"
-                  style={{
-                    textShadow:
-                      "0 0 10px hsla(var(--neon-green),0.8), 0 0 15px hsla(var(--neon-blue),0.6)",
-                  }}
-                >
-                  Tesseract XI.0
-                </h3>
-              </div>
-              <p
-                className="text-neon-orange mb-6 leading-relaxed max-w-md"
-                style={{
-                  textShadow: "0.5px 0.5px 3px hsla(var(--neon-orange),0.7)",
-                }}
-              >
-                Evolution Through Technologies - Where innovation meets the
-                future of computing and human potential.
-              </p>
-            </motion.div>
+      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+        {/* Heading */}
+        <div className="text-center md:text-left">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-white mb-4 leading-tight">
+            Join the Tesseract
+            <br className="hidden sm:block" />
+            Revolution!
+          </h1>
+          <p className="max-w-3xl mx-auto md:mx-0 text-gray-400 text-base sm:text-lg">
+            Join us at Tesseract XI.0 for cutting-edge innovations, exciting
+            competitions, and a glimpse into the future of technology.
+          </p>
+        </div>
 
-            {/* Event Highlights */}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+        {/* Logo + Nav + Socials */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Interactive Logo */}
+          <div className="glitch-wrapper" title="Tesseract XI.0">
+            <div
+              className="glitch text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+              data-text="TESSERACT XI.0"
             >
-              <h4
-                className="text-lg font-semibold mb-4 text-neon-blue"
-                style={{
-                  textShadow: "0 0 8px hsla(var(--neon-blue),0.8)",
-                }}
-              >
-                Event Highlights
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {eventHighlights.map((event, index) => (
-                  <motion.div
-                    key={index}
-                    className="inline-flex items-center text-xs text-neon-orange mr-6"
-                    whileHover={{
-                      scale: 1.05,
-                      textShadow: "0 0 8px hsla(var(--neon-orange), 1)",
-                    }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <span className="mr-1">{event.icon}</span>
-                    {event.name}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div> */}
+              TESSERACT XI.0
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              <h4
-                className="text-lg font-semibold mb-6 text-neon-purple"
-                style={{
-                  textShadow: "0 0 8px hsla(var(--neon-purple),0.8)",
-                }}
-              >
-                Quick Links
-              </h4>
-              <ul className="space-y-3">
-                {quickLinks.map((link, index) => (
-                  <motion.li
-                    key={index}
-                    whileHover={{
-                      y: -2,
-                      scale: 1.05,
-                      textShadow: "0 0 8px hsla(var(--neon-orange), 1)",
-                    }}
-                    transition={{ duration: 0.2 }}
+          {/* Navigation */}
+          <nav aria-label="Footer navigation" className="hidden md:block">
+            <ul className="flex gap-6 text-sm lg:text-base">
+              {["HOME", "ABOUT", "EVENTS", "GALLERY", "TEAM"].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`/${item.toLowerCase()}`}
+                    className="hover:text-white transition"
                   >
-                    <a
-                      href={link.href}
-                      className="text-sm text-neon-green hover:text-neon-orange transition-colors"
-                      onClick={() => console.log(`Navigate to ${link.name}`)}
-                    >
-                      {link.name}
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          {/* Contact Info */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
+          {/* Social Icons */}
+          <div className="flex items-center gap-4">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
             >
-              <h4
-                className="text-lg font-semibold mb-6 text-neon-green"
-                style={{
-                  textShadow: "0 0 8px hsla(var(--neon-green),0.8)",
-                }}
-              >
-                Contact Us
-              </h4>
-              <div className="space-y-4">
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{
-                    scale: 1.05,
-                    textShadow: "0 0 8px hsla(var(--neon-blue), 1)",
-                  }}
-                >
-                  <Mail
-                    className="w-4 h-4 text-neon-blue"
-                    style={{
-                      filter: "drop-shadow(0 0 5px hsla(var(--neon-blue),0.8))",
-                    }}
-                  />
-                  <span className="text-sm text-neon-orange">
-                    contact@tesseract.com
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{
-                    scale: 1.05,
-                    textShadow: "0 0 8px hsla(var(--neon-blue), 1)",
-                  }}
-                >
-                  <Phone
-                    className="w-4 h-4 text-neon-blue"
-                    style={{
-                      filter: "drop-shadow(0 0 5px hsla(var(--neon-blue),0.8))",
-                    }}
-                  />
-                  <span className="text-sm text-neon-orange">
-                    +1 (555) 123-4567
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{
-                    scale: 1.05,
-                    textShadow: "0 0 8px hsla(var(--neon-blue), 1)",
-                  }}
-                >
-                  <MapPin
-                    className="w-4 h-4 text-neon-blue"
-                    style={{
-                      filter: "drop-shadow(0 0 5px hsla(var(--neon-blue),0.8))",
-                    }}
-                  />
-                  <span className="text-sm text-neon-orange">
-                    Tech Campus, Innovation District
-                  </span>
-                </motion.div>
-              </div>
-            </motion.div>
+              <InstagramIcon />
+            </a>
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
+            >
+              <LinkedInIcon />
+            </a>
+            <a
+              href="#"
+              aria-label="WhatsApp"
+              className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
+            >
+              <WhatsAppIcon />
+            </a>
           </div>
         </div>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="flex justify-center mb-8"
-        >
-          <div className="flex space-x-6">
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.href}
-                className={`text-neon-green ${social.color} transition-colors p-1 rounded-lg hover:bg-neon-blue/30`}
-                whileHover={{
-                  scale: 1.15,
-                  y: -2,
-                  boxShadow: "0 0 10px hsla(var(--neon-blue),0.7)",
-                }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <social.icon
-                  className="w-6 h-6"
-                  style={{
-                    filter: "drop-shadow(0 0 6px hsla(var(--neon-green),0.8))",
-                  }}
-                />
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
+        <hr className="border-gray-800" />
 
-        {/* Copyright */}
-        <div
-          className="flex flex-wrap items-center justify-between gap-y-2 pt-4 mt-4 border-t border-neon-blue/60 text-xs text-neon-orange"
-          style={{
-            textShadow: "0.5px 0.5px 2px hsla(var(--neon-orange),0.7)",
-          }}
-        >
+        {/* Footer Bottom */}
+        <div className="text-center text-gray-500 text-xs sm:text-sm mb-2">
           <p>
-            © {currentYear} Tesseract - Tech Fest | Evolution Through
-            Technologies
+            Built by the 2025 tech team of SnT (Science And Technical Committee)
           </p>
-          <div className="flex gap-4">
-            <motion.button
-              whileHover={{
-                y: -2,
-                scale: 1.05,
-                textShadow: "0 0 8px hsla(var(--neon-green), 1)",
-              }}
-              className="hover:text-neon-green transition-colors"
-              style={{
-                textShadow: "0.5px 0.5px 2px hsla(var(--neon-orange),0.7)",
-              }}
-            >
-              Privacy Policy
-            </motion.button>
-            <motion.button
-              whileHover={{
-                y: -2,
-                scale: 1.05,
-                textShadow: "0 0 8px hsla(var(--neon-green), 1)",
-              }}
-              className="hover:text-neon-green transition-colors"
-              style={{
-                textShadow: "0.5px 0.5px 2px hsla(var(--neon-orange),0.7)",
-              }}
-            >
-              Terms of Service
-            </motion.button>
-          </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

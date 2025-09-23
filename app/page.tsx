@@ -5,7 +5,7 @@ import { Navbar } from "@/app/components/navbar";
 import InteractiveHero from "@/components/ui/hero-section";
 import { PreviewSections } from "@/components/ui/preview-sections";
 // import { TechEvolution } from "@/components/ui/tech-evolution";
-import { Footer } from "@/components/ui/footer";
+import Footer from "@/components/ui/footer";
 import { TeamGlimpse } from "@/components/ui/team-glimpse";
 import LoadingScreen from "@/components/ui/loading-screen";
 // import SponsorsSection from "@/components/ui/sponserSection";
