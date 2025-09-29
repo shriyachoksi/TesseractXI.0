@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
             Revolution!
           </h1>
           <p className="max-w-3xl mx-auto md:mx-0 text-gray-400 text-base sm:text-lg">
-            Join us at Tesseract XI.0 for cutting-edge innovations, exciting
+            Join us at Tesseract XI for cutting-edge innovations, exciting
             competitions, and a glimpse into the future of technology.
           </p>
         </div>
@@ -83,12 +83,12 @@ export const Footer: React.FC = () => {
         {/* Logo + Nav + Socials */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Interactive Logo */}
-          <div className="glitch-wrapper" title="Tesseract XI.0">
+          <div className="glitch-wrapper" title="Tesseract XI">
             <div
               className="glitch text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-              data-text="TESSERACT XI.0"
+              data-text="TESSERACT XI"
             >
-              TESSERACT XI.0
+              TESSERACT XI
             </div>
           </div>
 

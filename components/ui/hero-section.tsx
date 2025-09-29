@@ -299,7 +299,7 @@ const InteractiveHero = () => {
             style={parallax(10)}
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-white">
-              Tesseract XI.0
+              Tesseract XI
             </span>
           </h1>
 
