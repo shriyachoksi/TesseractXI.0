@@ -1,10 +1,16 @@
 "use client";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Clock, Cpu, Sparkles } from "lucide-react";
-import { Navbar } from "../components/navbar";
-import { getAllImages45, getGalleryImagesByCategory } from "./data";
+import { Badge, Calendar } from "lucide-react";
+import { Navbar } from "@/app/components/navbar";
+import { getAllImages45, findImageById } from "./data";
+import Footer from "@/components/ui/footer";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
+});
 
 // Simple Button component
 const Button = ({
@@ -43,25 +49,11 @@ const Gallery = () => {
   const [loadingImages, setLoadingImages] = useState<{
     [key: number]: boolean;
   }>({});
-  // Decade filter removed: always show all images in one page
 
-  // Shared data for both Masonry and Carousel (assign eras deterministically)
-  const decadesList = useMemo(
-    () => ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"],
-    []
-  );
-
-  // Show exactly 45 images: 15 from each category for balance
+  // Show exactly 45 images
   const allImages = useMemo(() => getAllImages45(), []);
 
-  const imagesWithDecade = useMemo(
-    () =>
-      allImages.map((img, idx) => ({
-        ...img,
-        decade: decadesList[idx % decadesList.length],
-      })),
-    [allImages, decadesList]
-  );
+  // Carousel removed; no representatives needed
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -126,62 +118,30 @@ const Gallery = () => {
       <Navbar />
       <main className="pt-20">
         {/* Header Section */}
-        <motion.section
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative py-4rem px-8 bg-gradient-to-br from-tesseract-light via-tesseract-cream to-tesseract-sand overflow-hidden"
-        >
-          {/* Enhanced Floating Background Elements */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute w-64 h-64 bg-tesseract-bronze/10 rounded-full blur-3xl top-10 left-1/4 animate-pulse"></div>
-            <div className="absolute w-48 h-48 bg-tesseract-sand/15 rounded-full blur-2xl top-1/2 right-1/3 animate-pulse delay-1000"></div>
-            <div className="absolute w-32 h-32 bg-tesseract-cream/20 rounded-full blur-xl bottom-1/4 left-1/2 animate-pulse delay-2000"></div>
-          </div>
+        <div className="text-center mt-5 mb-5">
+          <h1
+            className={`text-4xl md:text-5xl font-bold mb-4 tracking-wide ${orbitron.className}`}
+            style={{ textShadow: "0 0 15px rgba(59, 130, 246, 0.4)" }}
+          >
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+              Moments from Tesseract
+            </span>
+          </h1>
+          <p className="text-md text-slate-400 max-w-2xl mx-auto font-sans">
+            Relive the Best Moments Through Our Gallery
+          </p>
+        </div>
 
-          <div className="relative max-w-6xl mx-auto text-center">
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1, type: "spring", bounce: 0.6 }}
-              className="mb-8"
-            >
-              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-tesseract-bronze to-tesseract-dark rounded-2xl flex items-center justify-center shadow-2xl">
-                <Sparkles className="w-10 h-10 text-tesseract-light" />
-              </div>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-6xl lg:text-8xl font-black text-tesseract-dark mb-6 tracking-tight drop-shadow-lg"
-              style={{
-                textShadow:
-                  "2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(66,48,31,0.3)",
-              }}
-            >
-              GALLERY
-            </motion.h1>
-          </div>
-        </motion.section>
+        {/* Category Selection removed: single-page gallery */}
 
         {/* Gallery Grid */}
-        <section className="py-2rem px-8 bg-gradient-to-b from-tesseract-light to-tesseract-cream">
+        <section className="py-10 px-8 bg-gradient-to-b from-tesseract-light to-tesseract-cream">
           <motion.div
             className="max-w-7xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-3xl font-bold text-tesseract-dark text-center mb-12 capitalize"
-            >
-              Timeless Moments: A Tesseract Chronicle
-            </motion.h3>
-
             {/* Single view: Masonry Grid */}
 
             {/* Decade Filters removed: showing all images on a single page */}
@@ -201,7 +161,7 @@ const Gallery = () => {
                     />
                   </div>
                   <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-                    {imagesWithDecade.map((image, index) => (
+                    {allImages.map((image, index) => (
                       <motion.div
                         key={image.id}
                         variants={itemVariants}
@@ -248,9 +208,6 @@ const Gallery = () => {
                             <div className="text-xs text-tesseract-cream/90 line-clamp-2">
                               {image.description}
                             </div>
-                            <div className="mt-1 text-[10px] uppercase tracking-wide text-tesseract-cream/70">
-                              {(image as any).decade}
-                            </div>
                           </div>
                         </div>
                       </motion.div>
@@ -281,9 +238,10 @@ const Gallery = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
-                  const image = Object.values(getGalleryImagesByCategory())
-                    .flat()
-                    .find((img) => img.id === selectedImage);
+                  const image =
+                    selectedImage != null
+                      ? findImageById(selectedImage)
+                      : undefined;
                   return image ? (
                     <div>
                       {/* Header with title and close button (no overlap with image) */}
@@ -353,6 +311,7 @@ const Gallery = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        <Footer />
       </main>
     </div>
   );

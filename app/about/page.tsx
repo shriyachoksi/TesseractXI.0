@@ -103,10 +103,10 @@ export default function AboutPage() {
       description:
         "Tesseract X's 2024 theme centers around the five fundamental elements—Earth, Fire, Air, Water, and Ether—emphasizing their significance in shaping the future of technology and innovation.",
       images: [
-        "https://placehold.co/600x400/020617/22d3ee?text=Fest+2024+A",
-        "https://placehold.co/600x400/020617/22d3ee?text=Fest+2024+B",
-        "https://placehold.co/600x400/020617/22d3ee?text=Fest+2024+C",
-        "https://placehold.co/600x400/020617/22d3ee?text=Fest+2024+D",
+        "/about24/group.JPG",
+        "/about24/shivamWalk.JPEG",
+        "/about24/group2.PNG",
+        "/about24/SKS_7504.JPG",
       ],
     },
     {
@@ -115,10 +115,10 @@ export default function AboutPage() {
       description:
         "The Extraordinary TechVerse: Tesseract 2023 embraces superheroes, science fiction, and the multiverse to make complex scientific concepts more relatable and accessible to a broader audience.",
       images: [
-        "https://placehold.co/600x400/020617/6366f1?text=Fest+2023+A",
-        "https://placehold.co/600x400/020617/6366f1?text=Fest+2023+B",
-        "https://placehold.co/600x400/020617/6366f1?text=Fest+2023+C",
-        "https://placehold.co/600x400/020617/6366f1?text=Fest+2023+D",
+        "https://tesseract-x.vercel.app/static/media/23Ceremony.8fb8cdd7f69af273eb0e.JPG",
+        "https://tesseract-x.vercel.app/static/media/53ClubActivity.3ed21ca4d8d75d994880.JPG",
+        "https://tesseract-x.vercel.app/static/media/58ClubActivity.8c919bb8002c6e8c4200.JPG",
+        "https://tesseract-x.vercel.app/static/media/98ClubActivity.f4c18c89dfa42c0eff00.JPG",
       ],
     },
   ];
