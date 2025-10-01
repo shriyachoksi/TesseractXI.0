@@ -4,29 +4,26 @@ import Link from "next/link";
 
 const teamMembers = [
   {
-    name: "Alex Chen",
-    role: "Lead Developer",
-    bio: "Full-stack wizard specializing in AI integration and scalable architectures.",
-    skills: ["React", "Node.js", "AI/ML", "Cloud"],
-    image: "/professional-developer-portrait.png",
+    name: "Pratham Mohta",
+    role: "General Secretary",
+    bio: "General Secretary of SnT, leading the team with vision and dedication.",
+    skills: ["Leadership", "Strategy", "Management"],
+    image: "/heads/pratham-mohta.jpg",
   },
   {
-    name: "Maya Rodriguez",
-    role: "UX/UI Designer",
-    bio: "Creative visionary crafting intuitive interfaces for the digital future.",
-    skills: ["Figma", "Design Systems", "Prototyping", "User Research"],
-    image: "/creative-designer-portrait.png",
+    name: "Nisarg Adhvaryu",
+    role: "Treasurer",
+    bio: "Treasurer of SnT, ensuring smooth financial operations and planning.",
+    skills: ["Finance", "Organization", "Teamwork"],
+    image: "/heads/Nisarg Adhvaryu.jpg",
   },
 ];
 
 export function TeamGlimpse() {
   return (
-    <section className="py-10">
+    <section className="py-2">
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <div className="text-center mb-8">
-          <Badge className="mb-3 bg-neon-purple/10 text-neon-purple border-neon-purple/20 px-4 py-2 text-base">
-            Meet the Team
-          </Badge>
           <h2
             className="text-3xl md:text-4xl font-bold mb-1 tracking-tight"
             style={{ fontFamily: "var(--font-orbitron)" }}
@@ -78,7 +75,7 @@ export function TeamGlimpse() {
         </div>
 
         {/* View More CTA */}
-        <div className="mt-10 text-center">
+        <div className="mt-10 text-center mb-10">
           <Link
             href="/team"
             className="inline-block px-6 py-3 rounded-2xl bg-tesseract-dark text-tesseract-light hover:bg-tesseract-bronze transition-colors border border-tesseract-sand/30 shadow-md"

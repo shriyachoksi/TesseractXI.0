@@ -12,19 +12,18 @@ const orbitron = Orbitron({
   weight: ["400", "500", "700", "800"],
 });
 
-// Simple Button component
-const Button = ({
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  variant?: "default" | "outline";
+  className?: string;
+}
+
+const Button: React.FC<ButtonProps> = ({
   children,
   variant = "default",
   className = "",
   onClick,
   ...props
-}: {
-  children: React.ReactNode;
-  variant?: "default" | "outline";
-  className?: string;
-  onClick?: () => void;
-  [key: string]: any;
 }) => {
   const baseClasses =
     "px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center";
@@ -132,8 +131,6 @@ const Gallery = () => {
           </p>
         </div>
 
-        {/* Category Selection removed: single-page gallery */}
-
         {/* Gallery Grid */}
         <section className="py-10 px-8 bg-gradient-to-b from-tesseract-light to-tesseract-cream">
           <motion.div
@@ -169,7 +166,7 @@ const Gallery = () => {
                         whileInView="visible"
                         viewport={{ once: false, amount: 0.15 }}
                         className="mb-6 break-inside-avoid group cursor-pointer rounded-2xl overflow-hidden border border-tesseract-sand/30 bg-white shadow-sm hover:shadow-xl transition-shadow"
-                        onClick={() => setSelectedImage(image.id)}
+                        // onClick={() => setSelectedImage(image.id)}
                       >
                         <div className="relative w-full">
                           {/* Loading State */}
@@ -201,14 +198,14 @@ const Gallery = () => {
                             }
                           />
                           {/* Caption overlay */}
-                          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
+                          {/* <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
                             <div className="text-sm font-semibold line-clamp-1">
                               {image.title}
                             </div>
                             <div className="text-xs text-tesseract-cream/90 line-clamp-2">
                               {image.description}
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </motion.div>
                     ))}

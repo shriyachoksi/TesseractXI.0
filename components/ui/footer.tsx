@@ -111,21 +111,21 @@ export const Footer: React.FC = () => {
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://www.instagram.com/science_n_technical_committee/"
               aria-label="Instagram"
               className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
             >
               <InstagramIcon />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/science-technical-committee-of-pdeu/"
               aria-label="LinkedIn"
               className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
             >
               <LinkedInIcon />
             </a>
             <a
-              href="#"
+              href="https://chat.whatsapp.com/DADSOMxbxpG5fGzxXQYQYa?mode=ems_wa_c"
               aria-label="WhatsApp"
               className="flex items-center justify-center w-10 h-10 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-white/20"
             >

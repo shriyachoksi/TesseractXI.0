@@ -6,7 +6,7 @@ import { getAllImages45, GalleryImage } from "@/app/gallery/data";
 export default function GalleryPreview() {
   // Use the exact same images as the Gallery, but show a subset (first 9)
   const all = useMemo(() => getAllImages45(), []);
-  const images = useMemo(() => all.slice(0, 9), [all]);
+  const images = useMemo(() => all.slice(0, 14), [all]);
   const [loading, setLoading] = useState<{ [id: number]: boolean }>({});
 
   // Minimal variants identical to Gallery for matching motion
@@ -68,7 +68,9 @@ export default function GalleryPreview() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
-                className="mb-6 break-inside-avoid group cursor-pointer rounded-2xl overflow-hidden border border-tesseract-sand/30 bg-white shadow-sm hover:shadow-xl transition-shadow"
+                className="mb-6 w-full break-inside-avoid-column group cursor-pointer 
+                 rounded-2xl overflow-hidden border border-tesseract-sand/30 
+                 bg-white shadow-sm hover:shadow-xl transition-shadow"
               >
                 <div className="relative w-full">
                   {loading[image.id] && (
@@ -88,14 +90,14 @@ export default function GalleryPreview() {
                       setLoading((p) => ({ ...p, [image.id]: true }))
                     }
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
+                  {/* <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-tesseract-light">
                     <div className="text-sm font-semibold line-clamp-1">
                       {image.title}
                     </div>
                     <div className="text-xs text-tesseract-cream/90 line-clamp-2">
                       {image.description}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </motion.div>
             ))}

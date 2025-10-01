@@ -91,10 +91,10 @@ export default function AboutPage() {
       description:
         "Tesseract 2025 delves into the mind-bending world of quantum mechanics, exploring advancements in quantum computing, cryptography, and teleportation that are set to redefine the boundaries of technology.",
       images: [
-        "https://placehold.co/600x400/020617/3b82f6?text=Fest+2025+A",
-        "https://placehold.co/600x400/020617/3b82f6?text=Fest+2025+B",
-        "https://placehold.co/600x400/020617/3b82f6?text=Fest+2025+C",
-        "https://placehold.co/600x400/020617/3b82f6?text=Fest+2025+D",
+        "/abt25/26.JPG",
+        "/abt25/25.JPG",
+        "/abt25/8.JPG",
+        "/abt25/23.JPG",
       ],
     },
     {

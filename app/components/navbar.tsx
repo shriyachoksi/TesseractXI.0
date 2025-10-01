@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
               <img
-                src="/logo/logo_white.png"
+                src="/logo/tess_white.png"
                 alt="Tesseract Logo"
                 className="h-16 w-16 mr-3"
                 style={{

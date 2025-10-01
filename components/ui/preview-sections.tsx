@@ -4,14 +4,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Users,
-  Calendar,
-  ImageIcon,
-  Award,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
+import { Users, Calendar, ImageIcon, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export function PreviewSections() {
@@ -51,15 +44,15 @@ export function PreviewSections() {
       preview: "30+ Events",
       stats: "Workshops, hackathons, and tech talks",
     },
-    {
-      title: "Our Sponsors",
-      description: "Partners powering the future",
-      icon: <Award className="h-8 w-8" />,
-      color: "neon-green",
-      href: "#sponsors",
-      preview: "25+ Partners",
-      stats: "Industry leaders supporting innovation",
-    },
+    // {
+    //   title: "Our Sponsors",
+    //   description: "Partners powering the future",
+    //   icon: <Award className="h-8 w-8" />,
+    //   color: "neon-green",
+    //   href: "#sponsors",
+    //   preview: "25+ Partners",
+    //   stats: "Industry leaders supporting innovation",
+    // },
   ];
 
   return (
@@ -99,7 +92,7 @@ export function PreviewSections() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center justify-items-center">
+        <div className="flex flex-wrap justify-center gap-8">
           {sections.map((section, index) => (
             <Card
               key={index}

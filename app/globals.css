@@ -125,6 +125,63 @@
     text-shadow: 0 0 8px var(--color-blue-400), 0 0 16px var(--color-blue-500);
   }
 
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease-in-out infinite;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .card-glow {
+    box-shadow: 0 2px 24px 0 rgba(0, 255, 255, 0.1),
+      0 0 0 1.5px rgba(0, 255, 255, 0.1), 0 1.5px 8px 0 rgba(0, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  .card-glow:hover {
+    box-shadow: 0 4px 32px 0 rgba(0, 255, 255, 0.25), 0 0 0 2px #22d3ee,
+      0 2px 16px 0 #22d3ee44;
+    border-color: #22d3ee;
+  }
+
+  .neon-btn {
+    box-shadow: 0 0 0 0 #22d3ee;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  .neon-btn:hover,
+  .neon-btn:focus {
+    box-shadow: 0 0 8px 2px #22d3ee, 0 0 24px 8px #67e8f9;
+    border-color: #22d3ee;
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, #444 20%, #fff 40%, #444 60%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-text 1.5s infinite linear;
+  }
+
+  @keyframes shimmer-text {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+
   .blue-border {
     box-shadow: 0 0 8px var(--color-blue-400),
       inset 0 0 8px var(--color-blue-700);
@@ -171,4 +228,18 @@
   100% {
     transform: translate(50px, 50px);
   }
+}
+
+/* Shimmer animation for event buttons */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
 }

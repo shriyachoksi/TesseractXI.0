@@ -8,14 +8,15 @@ export type GalleryImage = {
 
 // Build from local originals under public/gallery/photos
 const localFilenames = [
-  "1.jpeg",
-  "2.JPG",
+  "19.JPG",
+  "8.JPG",
+  "1.jpg",
   "3.JPG",
   "4.JPG",
   "5.JPG",
   "6.JPG",
   "7.JPG",
-  "8.JPG",
+  "2.JPG",
   "9.JPG",
   "10.JPG",
   "11.JPG",
@@ -24,9 +25,7 @@ const localFilenames = [
   "13.JPG",
   "15.JPG",
   "16.JPG",
-  "17.JPG",
   "18.JPG",
-  "19.JPG",
   "20.JPG",
   "21.JPG",
   "22.JPG",
@@ -34,6 +33,11 @@ const localFilenames = [
   "24.JPG",
   "25.JPG",
   "26.JPG",
+  "27.JPG",
+  "28.JPG",
+  "29.JPG",
+  "30.JPG",
+  "31.JPG",
 ] as const;
 
 const stripExtension = (name: string) => name.replace(/\.[^.]+$/, "");
