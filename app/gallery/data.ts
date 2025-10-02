@@ -30,14 +30,14 @@ const localFilenames = [
   "21.jpg",
   "22.JPG",
   "23.JPG",
-  "24.JPG",
-  "25.JPG",
-  "26.JPG",
+  "24.jpg",
+  "25.jpg",
+  "26.jpg",
   "27.JPG",
   "28.JPG",
   "29.JPG",
-  "30.JPG",
-  "31.JPG",
+  "30.jpg",
+  "31.jpg",
 ] as const;
 
 const stripExtension = (name: string) => name.replace(/\.[^.]+$/, "");
