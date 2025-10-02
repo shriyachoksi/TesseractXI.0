@@ -10,7 +10,7 @@ export type GalleryImage = {
 const localFilenames = [
   "19.JPG",
   "8.JPG",
-  "1.jpg",
+  "1.JPG",
   "3.JPG",
   "4.JPG",
   "5.JPG",
