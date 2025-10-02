@@ -27,7 +27,7 @@ const localFilenames = [
   "16.JPG",
   "18.JPG",
   "20.JPG",
-  "21.JPG",
+  "21.jpg",
   "22.JPG",
   "23.JPG",
   "24.JPG",
