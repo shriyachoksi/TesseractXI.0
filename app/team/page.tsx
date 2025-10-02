@@ -260,7 +260,7 @@ export default function TeamPage() {
     {
       name: "Tathya Modi",
       role: "Public Relations and Marketing",
-      image: "/heads/tathya-modi.jpg",
+      image: "/heads/tathya-modi.JPG",
       linkedin:
         "https://www.linkedin.com/in/tathya-modi-98201423a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
       instagram: "https://www.instagram.com/tathyamodi_/",
