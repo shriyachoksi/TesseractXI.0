@@ -89,8 +89,8 @@ export default function AboutPage() {
       description:
         "TechTonic takes you on a journey through humanity’s greatest innovations — from the Industrial Revolution to today’s digital age and the future of AI, VR. It celebrates how progress shapes our lives while reminding us of our responsibility to innovate responsibly.",
       images: [
-        "/abt25/26.JPG",
-        "/abt25/25.JPG",
+        "/abt25/26.jpg",
+        "/abt25/25.jpg",
         "/abt25/8.JPG",
         "/abt25/23.JPG",
       ],
@@ -102,8 +102,8 @@ export default function AboutPage() {
         "Tesseract X's 2024 theme centers around the five fundamental elements—Earth, Fire, Air, Water, and Ether—emphasizing their significance in shaping the future of technology and innovation.",
       images: [
         "/about24/group.JPG",
-        "/about24/shivamWalk.JPEG",
-        "/about24/group2.PNG",
+        "/about24/shivamWalk.jpeg",
+        "/about24/group2.png",
         "/about24/SKS_7504.JPG",
       ],
     },
