@@ -124,7 +124,7 @@ const InteractiveHero = () => {
       off.width = targetW;
       off.height = targetH;
       const img = new Image();
-      img.src = "/logo/tess_white.png";
+      img.src = "/logo1/tess_white.png";
       await img.decode().catch(() => {});
       const ratio = Math.min(targetW / img.width, targetH / img.height);
       const drawW = Math.floor(img.width * ratio);

@@ -38,7 +38,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
               <img
-                src="/logo/tess_white.png"
+                src="/logo1/tess_white.png"
                 alt="Tesseract Logo"
                 className="h-16 w-16 mr-3"
                 style={{

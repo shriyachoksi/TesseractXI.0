@@ -44,20 +44,10 @@ export function PreviewSections() {
       preview: "30+ Events",
       stats: "Workshops, hackathons, and tech talks",
     },
-    // {
-    //   title: "Our Sponsors",
-    //   description: "Partners powering the future",
-    //   icon: <Award className="h-8 w-8" />,
-    //   color: "neon-green",
-    //   href: "#sponsors",
-    //   preview: "25+ Partners",
-    //   stats: "Industry leaders supporting innovation",
-    // },
   ];
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-background via-blue-950/20 to-background">
-      {" "}
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-background via-blue-950/20 to-background">
       {/* Subtle grid background */}
       <div
         aria-hidden="true"
@@ -69,34 +59,38 @@ export function PreviewSections() {
           backgroundPosition: "center",
         }}
       />
+
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl"
+          className="absolute top-0 left-1/4 w-72 sm:w-80 lg:w-96 h-72 sm:h-80 lg:h-96 bg-neon-cyan/5 rounded-full blur-3xl"
           style={{ transform: `translateY(${scrollY * 0.1}px)` }}
         />
         <div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl"
+          className="absolute bottom-0 right-1/4 w-72 sm:w-80 lg:w-96 h-72 sm:h-80 lg:h-96 bg-neon-purple/5 rounded-full blur-3xl"
           style={{ transform: `translateY(${-scrollY * 0.1}px)` }}
         />
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Heading */}
+        <div className="text-center mb-12 sm:mb-16">
           <Badge className="mb-4 bg-blue-500/10 text-neon-cyan border-neon-cyan/20 px-4 py-2 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 mr-2" />
             Explore Tesseract XI.0
           </Badge>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mt-4">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mt-4 px-2">
             Get a glimpse into the different facets of our tech ecosystem
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-8">
+        {/* Responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center">
           {sections.map((section, index) => (
             <Card
               key={index}
-              className="group relative p-6 bg-card/30 backdrop-blur-md border-border/50 hover:border-blue-400/40 transition-all duration-500 hover:shadow-[0_10px_40px_rgba(79,140,255,0.25)] overflow-hidden w-full max-w-[320px] md:max-w-[340px]"
+              className="group relative p-6 sm:p-7 bg-card/30 backdrop-blur-md border-border/50 hover:border-blue-400/40 transition-all duration-500 hover:shadow-[0_10px_40px_rgba(79,140,255,0.25)] overflow-hidden w-full max-w-sm"
               style={{
                 transform: `translateY(${
                   Math.sin((scrollY + index * 100) * 0.001) * 10
@@ -115,21 +109,21 @@ export function PreviewSections() {
                   {section.icon}
                 </div>
 
-                <h3 className="text-lg font-semibold mb-2 text-foreground tracking-wide">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-foreground tracking-wide">
                   {section.title}
                 </h3>
 
-                <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
                   {section.description}
                 </p>
 
                 <div className="flex items-center justify-between gap-3 mb-6">
                   <div
-                    className={`text-2xl md:text-3xl font-bold text-${section.color}`}
+                    className={`text-xl sm:text-2xl font-bold text-${section.color}`}
                   >
                     {section.preview}
                   </div>
-                  <div className="text-xs text-muted-foreground text-right leading-snug max-w-[58%]">
+                  <div className="text-xs sm:text-sm text-muted-foreground text-right leading-snug max-w-[58%]">
                     {section.stats}
                   </div>
                 </div>

@@ -1,9 +1,8 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/app/components/navbar";
 import { Footer } from "@/components/ui/footer";
-// import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useRef, useEffect, FC } from "react";
 import { Calendar, ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -30,7 +29,6 @@ const YearCard: FC<YearCardProps> = ({ event, isReversed }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
-      {/* Text Content - Order changes based on isReversed prop */}
       <div
         className={`flex flex-col justify-center text-center md:text-left ${
           isReversed ? "md:order-last" : ""
@@ -87,9 +85,9 @@ export default function AboutPage() {
   const techFestTimeline: TimelineEvent[] = [
     {
       year: 2025,
-      title: "Quantum Frontiers",
+      title: "TechTonic",
       description:
-        "Tesseract 2025 delves into the mind-bending world of quantum mechanics, exploring advancements in quantum computing, cryptography, and teleportation that are set to redefine the boundaries of technology.",
+        "TechTonic takes you on a journey through humanity’s greatest innovations — from the Industrial Revolution to today’s digital age and the future of AI, VR. It celebrates how progress shapes our lives while reminding us of our responsibility to innovate responsibly.",
       images: [
         "/abt25/26.JPG",
         "/abt25/25.JPG",

@@ -1,7 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
-import { Badge, Calendar } from "lucide-react";
 import { Navbar } from "@/app/components/navbar";
 import { getAllImages45, findImageById } from "./data";
 import Footer from "@/components/ui/footer";

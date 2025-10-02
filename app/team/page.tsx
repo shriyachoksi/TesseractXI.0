@@ -3,7 +3,6 @@ import { Navbar } from "@/app/components/navbar";
 
 import React, { useState, MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Orbitron } from "next/font/google";
 import { Footer } from "@/components/ui/footer";
 
 const Icon = ({ name, className }: { name: string; className: string }) => (
@@ -272,7 +271,7 @@ export default function TeamPage() {
       image: "/heads/zankar.jpg",
       linkedin:
         "https://www.linkedin.com/in/zankar-bhalala-3301a6289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      instagram: "#",
+      instagram: "https://www.instagram.com/jhankar_2201?igsh=dzVxYjh1YTVxNWM4",
     },
     {
       name: "Diya Arvadia",

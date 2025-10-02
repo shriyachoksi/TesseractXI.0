@@ -1,439 +1,76 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
-import {
-  Cpu,
-  Satellite,
-  Globe,
-  CircuitBoard,
-  Monitor,
-  Apple,
-  Laptop,
-  Wifi,
-  Code,
-  Search,
-  Music,
-  Users,
-  Video,
-  Smartphone,
-  Shield,
-  Tablet,
-  Cloud,
-  Camera,
-  Headphones,
-  Car,
-  Brain,
-  Zap,
-  Home,
-  Image,
-  MessageSquare,
-  Atom,
-  Rocket,
-} from "lucide-react";
 
-interface TechMilestone {
-  year: string;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  color: string;
-  category: string;
-}
-
-const techMilestones: TechMilestone[] = [
-  {
-    year: "1946",
-    title: "ENIAC Computer",
-    description: "First general-purpose electronic computer",
-    icon: Cpu,
-    color: "neon-blue",
-    category: "Computing",
-  },
-  {
-    year: "1957",
-    title: "Sputnik Launch",
-    description: "First artificial satellite in space",
-    icon: Satellite,
-    color: "neon-purple",
-    category: "Space",
-  },
-  {
-    year: "1969",
-    title: "ARPANET",
-    description: "Precursor to the modern Internet",
-    icon: Globe,
-    color: "neon-green",
-    category: "Networking",
-  },
-  {
-    year: "1971",
-    title: "Microprocessor",
-    description: "Intel 4004 - first commercial microprocessor",
-    icon: CircuitBoard,
-    color: "neon-orange",
-    category: "Computing",
-  },
-  {
-    year: "1975",
-    title: "Personal Computer",
-    description: "Altair 8800 - first personal computer",
-    icon: Monitor,
-    color: "neon-blue",
-    category: "Computing",
-  },
-  {
-    year: "1976",
-    title: "Apple I",
-    description: "First Apple computer",
-    icon: Apple,
-    color: "neon-green",
-    category: "Computing",
-  },
-  {
-    year: "1981",
-    title: "IBM PC",
-    description: "First IBM personal computer",
-    icon: Laptop,
-    color: "neon-purple",
-    category: "Computing",
-  },
-  {
-    year: "1983",
-    title: "ARPANET TCP/IP",
-    description: "Internet protocol suite adoption",
-    icon: Wifi,
-    color: "neon-blue",
-    category: "Networking",
-  },
-  {
-    year: "1984",
-    title: "Macintosh",
-    description: "First Macintosh with GUI",
-    icon: Monitor,
-    color: "neon-green",
-    category: "Computing",
-  },
-  {
-    year: "1989",
-    title: "World Wide Web",
-    description: "Tim Berners-Lee invents the Web",
-    icon: Globe,
-    color: "neon-purple",
-    category: "Web",
-  },
-  {
-    year: "1991",
-    title: "Linux",
-    description: "Open-source operating system",
-    icon: Code,
-    color: "neon-orange",
-    category: "Software",
-  },
-  {
-    year: "1995",
-    title: "Windows 95",
-    description: "Revolutionary operating system",
-    icon: Monitor,
-    color: "neon-blue",
-    category: "Software",
-  },
-  {
-    year: "1998",
-    title: "Google Search",
-    description: "Revolutionary search engine",
-    icon: Search,
-    color: "neon-green",
-    category: "Web",
-  },
-  {
-    year: "2001",
-    title: "iPod",
-    description: "Revolutionary portable music player",
-    icon: Music,
-    color: "neon-purple",
-    category: "Mobile",
-  },
-  {
-    year: "2004",
-    title: "Facebook",
-    description: "Social networking revolution",
-    icon: Users,
-    color: "neon-blue",
-    category: "Social",
-  },
-  {
-    year: "2005",
-    title: "YouTube",
-    description: "Video sharing platform",
-    icon: Video,
-    color: "neon-red",
-    category: "Web",
-  },
-  {
-    year: "2007",
-    title: "iPhone",
-    description: "First smartphone revolution",
-    icon: Smartphone,
-    color: "neon-green",
-    category: "Mobile",
-  },
-  {
-    year: "2008",
-    title: "Android",
-    description: "Open-source mobile platform",
-    icon: Smartphone,
-    color: "neon-orange",
-    category: "Mobile",
-  },
-  {
-    year: "2009",
-    title: "Bitcoin",
-    description: "First cryptocurrency",
-    icon: Shield,
-    color: "neon-yellow",
-    category: "Blockchain",
-  },
-  {
-    year: "2010",
-    title: "iPad",
-    description: "Tablet computing revolution",
-    icon: Tablet,
-    color: "neon-purple",
-    category: "Mobile",
-  },
-  {
-    year: "2011",
-    title: "Cloud Computing",
-    description: "AWS and cloud infrastructure",
-    icon: Cloud,
-    color: "neon-blue",
-    category: "Cloud",
-  },
-  {
-    year: "2012",
-    title: "Instagram",
-    description: "Photo sharing social network",
-    icon: Camera,
-    color: "neon-pink",
-    category: "Social",
-  },
-  {
-    year: "2014",
-    title: "Oculus VR",
-    description: "Virtual reality headset",
-    icon: Headphones,
-    color: "neon-purple",
-    category: "VR/AR",
-  },
-  {
-    year: "2015",
-    title: "Tesla Autopilot",
-    description: "Autonomous driving technology",
-    icon: Car,
-    color: "neon-green",
-    category: "AI/Automation",
-  },
-  {
-    year: "2016",
-    title: "AlphaGo",
-    description: "AI defeats human Go champion",
-    icon: Brain,
-    color: "neon-blue",
-    category: "AI",
-  },
-  {
-    year: "2017",
-    title: "Cryptocurrency Boom",
-    description: "Bitcoin reaches $20,000",
-    icon: Zap,
-    color: "neon-yellow",
-    category: "Blockchain",
-  },
-  {
-    year: "2018",
-    title: "GPT-1",
-    description: "First generative pre-trained transformer",
-    icon: Brain,
-    color: "neon-purple",
-    category: "AI",
-  },
-  {
-    year: "2019",
-    title: "5G Networks",
-    description: "Fifth generation wireless technology",
-    icon: Wifi,
-    color: "neon-blue",
-    category: "Networking",
-  },
-  {
-    year: "2020",
-    title: "Remote Work Revolution",
-    description: "Global shift to remote work",
-    icon: Home,
-    color: "neon-green",
-    category: "Work",
-  },
-  {
-    year: "2021",
-    title: "NFTs",
-    description: "Non-fungible tokens explosion",
-    icon: Image,
-    color: "neon-orange",
-    category: "Blockchain",
-  },
-  {
-    year: "2022",
-    title: "ChatGPT",
-    description: "AI chatbot revolution",
-    icon: MessageSquare,
-    color: "neon-blue",
-    category: "AI",
-  },
-  {
-    year: "2023",
-    title: "AI Art Generation",
-    description: "DALL-E, Midjourney, Stable Diffusion",
-    icon: Image,
-    color: "neon-purple",
-    category: "AI",
-  },
-  {
-    year: "2024",
-    title: "Quantum Computing",
-    description: "IBM Quantum System Two",
-    icon: Atom,
-    color: "neon-green",
-    category: "Quantum",
-  },
-  {
-    year: "2025",
-    title: "AGI Development",
-    description: "Artificial General Intelligence",
-    icon: Brain,
-    color: "neon-blue",
-    category: "AI",
-  },
-  {
-    year: "2026",
-    title: "Neural Interfaces",
-    description: "Brain-computer interfaces",
-    icon: Zap,
-    color: "neon-purple",
-    category: "Biotech",
-  },
-  {
-    year: "2027",
-    title: "Mars Colonization",
-    description: "First human settlement on Mars",
-    icon: Rocket,
-    color: "neon-red",
-    category: "Space",
-  },
-  {
-    year: "2028",
-    title: "Fusion Energy",
-    description: "Clean unlimited energy",
-    icon: Zap,
-    color: "neon-yellow",
-    category: "Energy",
-  },
-  {
-    year: "2029",
-    title: "Singularity",
-    description: "Technological singularity",
-    icon: Brain,
-    color: "neon-blue",
-    category: "Future",
-  },
-  {
-    year: "2030",
-    title: "Post-Human Era",
-    description: "Human-AI symbiosis",
-    icon: Users,
-    color: "neon-purple",
-    category: "Future",
-  },
+const logoFiles = [
+  "/logo1/aatmann.png.png",
+  "/logo1/anirveda png.png",
+  "/logo1/Avionics.png",
+  "/logo1/Brahmand Logo - White PNG.png",
+  "/logo1/bulls&b.png",
+  "/logo1/Cretus.png",
+  "/logo1/encode.png",
+  "/logo1/enviro white new.png",
+  "/logo1/Mind~Ripple.png",
+  "/logo1/Nucleus.png",
+  "/logo1/S&T.png",
+  "/logo1/SoM logo (Black text).png",
+  "/logo1/Sorriso (2).png",
+  "/logo1/SYMMETRY NEW WHITELOGO1.4.2.png",
+  "/logo1/Synergy.png",
+  "/logo1/tir.png",
+  "/logo1/Vga-logo.png",
+  "/logo1/tess_white.png",
 ];
 
-const colorMap: { [key: string]: string } = {
-  "neon-blue": "#4F46E5",
-  "neon-purple": "#8B5CF6",
-  "neon-green": "#22C55E",
-  "neon-orange": "#F97316",
-  "neon-red": "#EF4444",
-  "neon-yellow": "#EAB308",
-  "neon-pink": "#EC4899",
-};
-
 export default function LoadingScreen() {
-  const router = useRouter();
-  const [currentMilestoneIndex, setCurrentMilestone] = useState(0);
+  const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const milestoneIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
-    null
-  );
+  const logoIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     setProgress(
       Math.min(
         100,
-        Math.round(((currentMilestoneIndex + 1) / techMilestones.length) * 100)
+        Math.round(((currentLogoIndex + 1) / logoFiles.length) * 100)
       )
     );
   }, []);
 
   useEffect(() => {
-    // Cycle icons once; derive progress from index and stop at the end
     if (!isLoading) return;
-    milestoneIntervalRef.current = setInterval(() => {
-      setCurrentMilestone((prev) => {
-        const isLast = prev >= techMilestones.length - 1;
-        const nextIndex = isLast ? prev : prev + 1;
-        const pct = Math.min(
-          100,
-          Math.round(((nextIndex + 1) / techMilestones.length) * 100)
-        );
-        setProgress(pct);
-
-        if (isLast) {
+    logoIntervalRef.current = setInterval(() => {
+      setCurrentLogoIndex((prev) => {
+        // Stop at last logo
+        if (prev === logoFiles.length - 1) {
+          setProgress(100);
           setIsLoading(false);
-          if (milestoneIntervalRef.current) {
-            clearInterval(milestoneIntervalRef.current);
-            milestoneIntervalRef.current = null;
+          if (logoIntervalRef.current) {
+            clearInterval(logoIntervalRef.current);
+            logoIntervalRef.current = null;
           }
           return prev;
         }
-
-        // If the next one is the last, we'll stop on the next tick
-        if (nextIndex >= techMilestones.length - 1) {
-          // Set progress to 100 right when last appears
-          setProgress(100);
-        }
-
+        const nextIndex = prev + 1;
+        const pct = Math.min(
+          100,
+          Math.round(((nextIndex + 1) / logoFiles.length) * 100)
+        );
+        setProgress(pct);
         return nextIndex;
       });
-    }, 100);
+    }, 240);
 
     return () => {
-      if (milestoneIntervalRef.current) {
-        clearInterval(milestoneIntervalRef.current);
-        milestoneIntervalRef.current = null;
+      if (logoIntervalRef.current) {
+        clearInterval(logoIntervalRef.current);
+        logoIntervalRef.current = null;
       }
     };
   }, [isLoading]);
 
-  const handleHomeClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsLoading(false);
-    setProgress(100);
-    router.replace("/");
-  };
-
-  const currentMilestone = techMilestones[currentMilestoneIndex];
-  const MilestoneIcon = currentMilestone.icon;
-  const isComplete = progress >= 100;
+  const currentLogo = logoFiles[currentLogoIndex];
 
   return (
     <div
@@ -444,6 +81,19 @@ export default function LoadingScreen() {
         backgroundSize: "20px 20px",
       }}
     >
+      {/* Mobile view: only logo + % */}
+      <div className="block md:hidden relative w-full h-full min-h-screen flex items-center justify-center">
+        <img
+          src={currentLogo}
+          alt={currentLogo.replace(/\.[^.]+$/, "")}
+          className="w-40 h-40 object-contain drop-shadow-[0_2px_12px_rgba(0,255,255,0.15)]"
+          loading="eager"
+        />
+        <span className="absolute bottom-3 right-3 text-white text-sm font-mono">
+          {Math.round(progress)}%
+        </span>
+      </div>
+
       {/* Camera body */}
       <div
         className="relative w-full max-w-[920px] aspect-[1.65] bg-[#1d1d1f] rounded-[28px] shadow-[0_30px_60px_rgba(0,0,0,0.6)] font-sans"
@@ -502,7 +152,6 @@ export default function LoadingScreen() {
             </button>
             <button
               className="w-10 h-10 rounded-lg bg-[#1f1f22] border border-black/60 shadow-[0_4px_10px_rgba(0,0,0,0.6)] text-gray-300 hover:bg-[#26262b] flex items-center justify-center"
-              onClick={handleHomeClick}
               type="button"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -544,36 +193,15 @@ export default function LoadingScreen() {
                 </span>
               </div>
 
-              {isComplete ? (
-                <div className="relative z-10 flex items-center justify-center h-full">
-                  <span
-                    className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
-                    style={{
-                      fontFamily:
-                        'var(--font-orbitron), "Segoe UI", system-ui, -apple-system, sans-serif',
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    TESSERACT XI
-                  </span>
-                </div>
-              ) : (
-                <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
-                  <MilestoneIcon
-                    className="w-24 h-24 mb-4 animate-fade-in-up"
-                    style={{ color: colorMap[currentMilestone.color] }}
-                  />
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 animate-fade-in-up">
-                    {currentMilestone.title}
-                  </h1>
-                  <p className="text-base sm:text-lg mb-2 animate-fade-in-up text-gray-300">
-                    {currentMilestone.year}
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-400 animate-fade-in-up">
-                    {currentMilestone.description}
-                  </p>
-                </div>
-              )}
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
+                <img
+                  src={currentLogo}
+                  alt={currentLogo.replace(/\.[^.]+$/, "")}
+                  className="w-64 h-64 object-contain mb-4 drop-shadow-[0_2px_12px_rgba(0,255,255,0.15)]"
+                  loading="eager"
+                />
+              </div>
+
               <span className="absolute bottom-3 right-3 text-white text-[10px] font-mono">
                 {Math.round(progress)}%
               </span>
